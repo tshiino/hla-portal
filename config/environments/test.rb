@@ -33,4 +33,7 @@ HlaPortal::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # down bcrypt cost to boost the test speed
+  ActiveModel::SecurePassword.min_cost = true
 end
