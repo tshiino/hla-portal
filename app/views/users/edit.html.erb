@@ -12,6 +12,9 @@
       <%= f.label :email %>
       <%= f.text_field :email %>
 
+      <%= f.label :affiliation %>
+      <%= f.collection_select :affiliation, InstitutesMaster.all, :id, :name %>
+
       <%= f.label :password %>
       <%= f.password_field :password %>
 

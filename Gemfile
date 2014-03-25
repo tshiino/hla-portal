@@ -16,6 +16,10 @@ group :development, :test do
 	gem 'rspec-rails', '>= 2.13.1'
 end
 
+#group :development do
+#        gem 'annotate', '2.5.0'
+#end
+
 group :test do
 	gem 'selenium-webdriver', '>= 2.35.1'
 	gem 'capybara', '>= 2.1.0'
@@ -32,7 +36,7 @@ gem 'uglifier', '>= 2.1.1'
 gem 'coffee-rails', '~> 4.0.1'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails', '>= 3.0.4'

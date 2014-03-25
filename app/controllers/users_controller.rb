@@ -5,11 +5,13 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    @user_affil = User.find(:all)
   end
 
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    @affiliation_name = @user.institutes_master.name
   end
 
   def new
@@ -64,7 +66,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password,
+      params.require(:user).permit(:name, :email, :affiliation, :password,
                                    :password_confirmation)    
     end
 

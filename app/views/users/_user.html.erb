@@ -5,4 +5,12 @@
     | <%= link_to "delete", user, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>
+  <br>
+  <% @affil_id = user.affiliation %>
+  <% @an = InstitutesMaster.find(:all,
+                                        :conditions => ["id = ?", @affil_id ],
+                                        :select => "id,name") %>
+  <% @affil_name = @an.to_s %>
+  <% /"(.*)"/ =~ @affil_name %>
+  <%= $1 %>
 </li>

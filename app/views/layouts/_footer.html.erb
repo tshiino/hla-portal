@@ -6,6 +6,9 @@
     <ul>
       <li><%= link_to "About",   about_path %></li>
       <li><%= link_to "Contact", contact_path %></li>
+      <% if signed_in? %>
+        <li><%= link_to "Manage DB", "http://sagittarius.nih.go.jp/" %></li>
+      <% end %>
     </ul>
   </nav>
 </footer>
