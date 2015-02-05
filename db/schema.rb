@@ -11,26 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140320071610) do
+ActiveRecord::Schema.define(version: 20150205083351) do
 
-  create_table "institutes_masters", force: true do |t|
-    t.string   "name"
+  create_table "institutes_masters", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "microposts", force: true do |t|
-    t.string   "content"
-    t.integer  "user_id"
+  create_table "microposts", force: :cascade do |t|
+    t.string   "content",    limit: 255
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
 
-  create_table "relationships", force: true do |t|
-    t.integer  "follower_id"
-    t.integer  "followed_id"
+  create_table "patients", force: :cascade do |t|
+    t.string   "niid_id",        limit: 16
+    t.string   "lab_id",         limit: 16
+    t.string   "affiliation",    limit: 16
+    t.string   "hosp_id",        limit: 16
+    t.string   "gender",         limit: 16
+    t.string   "nationarity",    limit: 4
+    t.date     "date_of_birth"
+    t.date     "date_diagnosed"
+    t.string   "edu_background", limit: 32
+    t.string   "occupation",     limit: 128
+    t.string   "marital_status", limit: 16
+    t.string   "risk",           limit: 16
+    t.integer  "operator_id",    limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id", limit: 4
+    t.integer  "followed_id", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,15 +57,15 @@ ActiveRecord::Schema.define(version: 20140320071610) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
-  create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "users", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "email",           limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "remember_token"
-    t.boolean  "admin",           default: false
-    t.integer  "affiliation"
+    t.string   "password_digest", limit: 255
+    t.string   "remember_token",  limit: 255
+    t.boolean  "admin",           limit: 1,   default: false
+    t.integer  "affiliation",     limit: 4
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

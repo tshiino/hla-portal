@@ -1,5 +1,7 @@
 HlaPortal::Application.routes.draw do
 
+  resources :patients
+
   get "users/new"
   resources :users do
     member do

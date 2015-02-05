@@ -5,7 +5,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
-    @user_affil = User.find(:all)
+#    @user_affil = User.where( active: true )
+    @user_affil = User.all
   end
 
   def show

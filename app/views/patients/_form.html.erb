@@ -1,0 +1,55 @@
+<%= form_for(@patient) do |f| %>
+  <% if @patient.errors.any? %>
+    <div id="error_explanation">
+	<h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.label :niid_id %><br>
+    <%= f.text_field :niid_id %>
+
+    <%= f.label :lab_id %><br>
+    <%= f.text_field :lab_id %>
+
+    <%= f.label :affiliation %><br>
+    <%= f.select :affiliation, Patient.affiliation.options %>
+
+    <%= f.label :hosp_id %><br>
+    <%= f.text_field :hosp_id %>
+
+    <%= f.label :gender %><br>
+    <%= f.select :gender, Patient.gender.options %>
+
+    <%= f.label :nationarity %><br>
+    <%= f.text_field :nationarity %>
+
+    <%= f.label :date_of_birth %><br>
+    <%= f.date_select :date_of_birth %>
+
+    <%= f.label :date_diagnosed %><br>
+    <%= f.date_select :date_diagnosed %>
+
+    <%= f.label :edu_background %><br>
+    <%= f.select :edu_background, Patient.edu_background.options %>
+
+    <%= f.label :occupation %><br>
+    <%= f.text_field :occupation %>
+
+    <%= f.label :marital_status %><br>
+    <%= f.select :marital_status, Patient.marital_status.options %>
+
+    <%= f.label :risk %><br>
+    <%= f.select :risk, Patient.risk.options %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
