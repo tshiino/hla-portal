@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Niid:</strong>
+  <strong>NIID_ID:</strong>
   <%= @patient.niid_id %>
 </p>
 
 <p>
-  <strong>Lab:</strong>
+  <strong>Laboratory_ID:</strong>
   <%= @patient.lab_id %>
 </p>
 
@@ -16,7 +16,7 @@
 </p>
 
 <p>
-  <strong>Hosp:</strong>
+  <strong>Hospital:</strong>
   <%= @patient.hosp_id %>
 </p>
 
@@ -26,8 +26,8 @@
 </p>
 
 <p>
-  <strong>Nationarity:</strong>
-  <%= @patient.nationarity %>
+  <strong>Nationality:</strong>
+  <%= @patient.country_code.country %>
 </p>
 
 <p>
@@ -41,7 +41,7 @@
 </p>
 
 <p>
-  <strong>Edu background:</strong>
+  <strong>Educational background:</strong>
   <%= @patient.edu_background %>
 </p>
 
@@ -62,7 +62,7 @@
 
 <p>
   <strong>Operator:</strong>
-  <%= @patient.operator_id %>
+  <%= @operator_name %>
 </p>
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |

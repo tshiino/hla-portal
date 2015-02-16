@@ -1,16 +1,19 @@
 class PatientsController < ApplicationController
-  before_action :signed_in_user, only: [:show, :new, :edit, :update, :create, :destroy]
+  before_action :signed_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   # GET /patients
   # GET /patients.json
   def index
-    @patients = Patient.all
+#    @patients = Patient.all
+    @patients = Patient.order("niid_id")
   end
 
   # GET /patients/1
   # GET /patients/1.json
   def show
+    @nationarity_name = @patient.country_code.country
+    @operator_name = @patient.user.name
   end
 
   # GET /patients/new
@@ -20,12 +23,14 @@ class PatientsController < ApplicationController
 
   # GET /patients/1/edit
   def edit
+    @nationarity_name = @patient.country_code.country
   end
 
   # POST /patients
   # POST /patients.json
   def create
     @patient = Patient.new(patient_params)
+    @patient.operator_id = current_user.id
 
     respond_to do |format|
       if @patient.save

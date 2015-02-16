@@ -1,3 +1,47 @@
 // Place all the styles related to the Patients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.Operator{
+  test-align: right;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.date{
+  width: auto;
+}
+
+label{
+  display: block;
+  width: 125px;
+  float: left;
+  margin-bottom: 10px;
+
+  text-align: right;
+  padding-right: 15px;
+}
+
+label.radio{
+  width: 100px;
+  text-align: left;
+}
+
+input,select{
+  display: block;
+  width: auto;
+  float: left;
+  margin-bottom: 10px;
+}
+
+br {
+  clear: left;
+}
+
+input.occupation{
+  width: 360px;
+}
+
+div.form-actions{
+  
+}

@@ -1,52 +1,68 @@
 <%= form_for(@patient) do |f| %>
   <% if @patient.errors.any? %>
     <div id="error_explanation">
-	<h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+	<h2><%= @patient.errors.count %> errors prohibited your input from being saved:</h2>
 
       <ul>
-      <% @item.errors.full_messages.each do |msg| %>
+      <% @patient.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
+  <div class="Operator">
+    Operator:
+    <%= current_user.name %>
+  </div>
+
   <div class="form-inputs">
-    <%= f.label :niid_id %><br>
+    <%= f.label :niid_id, 'NIID_ID' %>
     <%= f.text_field :niid_id %>
 
-    <%= f.label :lab_id %><br>
-    <%= f.text_field :lab_id %>
+    <%= f.label :lab_id, 'Laboratory_ID' %>
+    <%= f.text_field :lab_id %><br>
 
-    <%= f.label :affiliation %><br>
-    <%= f.select :affiliation, Patient.affiliation.options %>
+<!--    <%= f.label :affiliation %>
+        <%= f.select :affiliation, Patient.affiliation.options %><br> -->
 
-    <%= f.label :hosp_id %><br>
-    <%= f.text_field :hosp_id %>
+    <%= f.label :affiliation %>
+    <label class="radio">
+      <%= f.radio_button :affiliation, 'Vietnam', :checked => "checked" %>Vietnam</label>
+    <label class="radio">
+      <%= f.radio_button :affiliation, 'Ghana' %>Ghana</label>
+    <label class="radio">
+      <%= f.radio_button :affiliation, 'India' %>India</label>
+    <label class="radio">
+      <%= f.radio_button :affiliation, 'Japan' %>Japan</label><br>
 
-    <%= f.label :gender %><br>
-    <%= f.select :gender, Patient.gender.options %>
+    <br>
+    <%= f.label :hosp_id, 'ID of Hospital' %>
+    <%= f.text_field :hosp_id %><br>
 
-    <%= f.label :nationarity %><br>
-    <%= f.text_field :nationarity %>
+    <%= f.label :gender %>
+    <%= f.select :gender, Patient.gender.options %><br>
 
-    <%= f.label :date_of_birth %><br>
-    <%= f.date_select :date_of_birth %>
+    <%= f.label :nationarity, 'Nationality' %>
+    <%= f.collection_select :nationarity, CountryCode.all, :id, :country %><br>
 
-    <%= f.label :date_diagnosed %><br>
-    <%= f.date_select :date_diagnosed %>
+    <%= f.label :date_of_birth %>
+    <%= f.date_select :date_of_birth, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date' %><br>
 
-    <%= f.label :edu_background %><br>
-    <%= f.select :edu_background, Patient.edu_background.options %>
+    <%= f.label :date_diagnosed %>
+    <%= f.date_select :date_diagnosed, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date' %><br>
 
-    <%= f.label :occupation %><br>
-    <%= f.text_field :occupation %>
+    <%= f.label :edu_background %>
+    <%= f.select :edu_background, Patient.edu_background.options %><br>
 
-    <%= f.label :marital_status %><br>
-    <%= f.select :marital_status, Patient.marital_status.options %>
+    <%= f.label :occupation %>
+    <%= f.text_field :occupation, :class => 'occupation' %><br>
 
-    <%= f.label :risk %><br>
-    <%= f.select :risk, Patient.risk.options %>
+    <%= f.label :marital_status %>
+    <%= f.select :marital_status, Patient.marital_status.options %><br>
+
+    <%= f.label :risk %>
+    <%= f.select :risk, Patient.risk.options %><br>
   </div>
 
   <div class="form-actions">

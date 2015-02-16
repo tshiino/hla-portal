@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Patients</h1>
-
 <table>
   <thead>
     <tr>
@@ -10,14 +9,15 @@
       <th>Affiliation</th>
       <th>Hosp</th>
       <th>Gender</th>
-      <th>Nationarity</th>
-      <th>Date of birth</th>
+      <th>Nationality</th>
+<!--      <th>Date of birth</th>-->
       <th>Date diagnosed</th>
       <th>Edu background</th>
       <th>Occupation</th>
       <th>Marital status</th>
       <th>Risk</th>
-      <th>Operator</th>
+<!--      <th>Operator</th>-->
+      <th colspan="3">Edit HLA</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -30,14 +30,17 @@
         <td><%= patient.affiliation %></td>
         <td><%= patient.hosp_id %></td>
         <td><%= patient.gender %></td>
-        <td><%= patient.nationarity %></td>
-        <td><%= patient.date_of_birth %></td>
+        <td><%= patient.country_code.code %></td>
+<!--        <td><%= patient.date_of_birth %></td>-->
         <td><%= patient.date_diagnosed %></td>
         <td><%= patient.edu_background %></td>
         <td><%= patient.occupation %></td>
         <td><%= patient.marital_status %></td>
         <td><%= patient.risk %></td>
-        <td><%= patient.operator_id %></td>
+<!--        <td><%= patient.operator_id %></td>-->
+        <td><%= link_to 'A', '#' %></td>
+        <td><%= link_to 'B', '#' %></td>
+        <td><%= link_to 'C', '#' %></td>
         <td><%= link_to 'Show', patient %></td>
         <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
         <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>

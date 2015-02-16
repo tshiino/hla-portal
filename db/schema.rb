@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205083351) do
+ActiveRecord::Schema.define(version: 20150210014523) do
+
+  create_table "country_codes", force: :cascade do |t|
+    t.string   "code",       limit: 4
+    t.string   "country",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "institutes_masters", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -34,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150205083351) do
     t.string   "affiliation",    limit: 16
     t.string   "hosp_id",        limit: 16
     t.string   "gender",         limit: 16
-    t.string   "nationarity",    limit: 4
+    t.integer  "nationarity",    limit: 4
     t.date     "date_of_birth"
     t.date     "date_diagnosed"
     t.string   "edu_background", limit: 32

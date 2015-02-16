@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 # gem 'rails', '4.0.2'
 gem 'rails', '4.2.0'
+#gem 'activerecord'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'mysql'
 gem 'rb-readline', '~>0.4.2'
@@ -10,7 +11,7 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
-gem 'rails-erd'
+gem 'rails-erd', '~>1.2'
 gem 'enumerize' 
 gem 'enum_help'
 gem 'simple_form'
@@ -18,7 +19,7 @@ gem 'simple_form'
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3', '1.3.8'
-	gem 'rspec-rails'
+	gem 'rspec-rails', '~>3.0.2'
 end
 
 #group :development do
