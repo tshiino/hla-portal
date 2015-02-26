@@ -61,9 +61,40 @@
 </p>
 
 <p>
+  <strong>ART:</strong>
+    <%if @patient.date_of_art_init == nil then %>
+       na&#239;ve
+    <% else %>
+       started in <%= @patient.date_of_art_init %>
+    <% end %>
+</p>
+
+<p>
+  <strong>HLA-A:</strong>
+  A*<%= @locus_as[0][0] %>:<%= @locus_as[0][1] %>&nbsp;|&nbsp;
+  A*<%= @locus_as[1][0] %>:<%= @locus_as[1][1] %>
+  &emsp; examined at:&nbsp;<%= @locus_as[0][2] %>
+</p>
+
+<p>
+  <strong>HLA-B:</strong>
+  B*<%= @locus_bs[0][0] %>:<%= @locus_bs[0][1] %>&nbsp;|&nbsp;
+  B*<%= @locus_bs[1][0] %>:<%= @locus_bs[1][1] %>
+  &emsp; examined at:&nbsp;<%= @locus_bs[0][2] %>
+</p>
+
+<p>
+  <strong>HLA-C:</strong>
+  C*<%= @locus_cs[0][0] %>:<%= @locus_cs[0][1] %>&nbsp;|&nbsp;
+  C*<%= @locus_cs[1][0] %>:<%= @locus_cs[1][1] %>
+  &emsp; examined at:&nbsp;<%= @locus_cs[0][2] %>
+</p>
+
+<p>
   <strong>Operator:</strong>
   <%= @operator_name %>
 </p>
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
-<%= link_to 'Back', patients_path %>
+<%= link_to 'Back to Patients', patients_path %> |
+<%= link_to 'Back to HLAs', hlas_path %>

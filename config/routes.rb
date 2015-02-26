@@ -1,8 +1,19 @@
 HlaPortal::Application.routes.draw do
 
-  resources :patients
+  get 'hlas/serotype_select1', to: 'hlas#serotype_select1'
+  get 'hlas/serotype_select2', to: 'hlas#serotype_select2'
+  get 'hlas/destroy'
+  get 'hlas', to: 'hlas#index'
+  get 'hlas/newa'
+  get 'hlas/newb'
+  get 'hlas/newc'
+  get 'hlas/edita'
+  get 'hlas/editb'
+  get 'hlas/editc'
+  get 'locus_as/show', to: 'patients#show'
+  get 'locus_bs/show', to: 'patients#show'
+  get 'locus_cs/show', to: 'patients#show'
 
-  get "users/new"
   resources :users do
     member do
       get :following, :followers
@@ -12,6 +23,14 @@ HlaPortal::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :patients
+  resources :hlas, only: [:index]
+  resources :locus_as, only: [:new, :create], controller: :hlas
+  resources :locus_a, only: [:edita, :update], controller: :hlas
+  resources :locus_bs, only: [:new, :create], controller: :hlas
+  resources :locus_b, only: [:editb, :update], controller: :hlas
+  resources :locus_cs, only: [:new, :create], controller: :hlas
+  resources :locus_c, only: [:editc, :update], controller: :hlas
 
   root  'static_pages#top'
   match '/help',    to: 'static_pages#help',    via: 'get'

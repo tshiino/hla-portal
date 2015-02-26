@@ -1,0 +1,25 @@
+<h1>New HLA-C Genotype</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', hlas_path %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#locus_c_serotype1').change(function(){
+      var serotype_name = $('#locus_c_serotype1 option:selected').text();
+      $.get("<%= hlas_serotype_select1_path %>",
+        { serotype_name: serotype_name, locus: "LocusC" },
+        function(data){ }
+      );
+    });
+    $('#locus_c_serotype2').change(function(){
+      var serotype_name2 = $('#locus_c_serotype2 option:selected').text();
+      $.get("<%= hlas_serotype_select2_path %>",
+        { serotype_name2: serotype_name2, locus: 'LocusC' },
+        function(data){ }
+      );
+    });
+  });
+</script>
+

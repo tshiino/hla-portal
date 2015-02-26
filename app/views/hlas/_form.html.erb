@@ -1,0 +1,50 @@
+<h3>Patient: <%= @patient.niid_id %> (<%= @patient.lab_id %>)</h3>
+
+<div class="Operator">
+  Operator:
+  <%= current_user.name %>
+  &emsp;Scope:
+  <%= @hla1.type %>
+</div>
+
+
+<%= form_for(@hla1) do |f| %>
+  <% if @hla1.errors.any? %>
+    <div id="error_explanation">
+	<h2><%= @hla1.errors.count %> errors prohibited your input from being saved:</h2>
+
+      <ul>
+      <% @hla1.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <% @hla1.patient_id = @patient.id %>
+    <%= f.hidden_field :patient_id %>
+    <%= f.label :date_exam, 'Date Examined' %>
+    <%= f.date_select :date_exam, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date' %><br>
+
+    <br>
+    <% @chromatid = 1 %>
+    <%= f.label :serotype, 'Allele-1:' %>
+    <%= render 'serotype_form', {:f => f} %>
+    <%= render 'allele_form', {:f => f} %>
+    <%= f.submit 'Submit_as_Homozygote', name: "homozygote" %><br>
+  </div>
+
+  <div class="form-inputs">
+    <% @chromatid =2 %>
+    <%= f.label :dserotype, 'Allele-2:' %>
+    <%= render 'serotype_form', {:f => f} %>
+    <%= render 'allele_form', {:f => f} %>
+    <br>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Submit', :name => "heterozygote" %>
+  </div>
+<% end %>
+

@@ -1,0 +1,20 @@
+<% case @hla1.type %>
+<% when 'LocusA' %>
+  <% if @chromatid == 1 then %>
+  <%= f.select :serotype, @serotypes, { include_blank: true }, { id: "locus_a_serotype#{@chromatid}" } %>
+  <% else %>
+  <%= f.select :dserotype, @serotypes, { include_blank: true }, { id: "locus_a_serotype#{@chromatid}" } %>
+  <% end %>
+<% when 'LocusB' %>
+  <% if @chromatid == 1 then %>
+  <%= f.select :serotype, @serotypes, { include_blank: true }, { id: "locus_b_serotype#{@chromatid}" } %>
+  <% else %>
+  <%= f.select :dserotype, @serotypes, { include_blank: true }, { id: "locus_b_serotype#{@chromatid}" } %>
+  <% end %>
+<% when 'LocusC' %>
+  <% if @chromatid == 1 then %>
+  <%= f.select :serotype, @serotypes, { include_blank: true }, { id: "locus_c_serotype#{@chromatid}" } %>
+  <% else %>
+  <%= f.select :dserotype, @serotypes, { include_blank: true }, { id: "locus_c_serotype#{@chromatid}" } %>
+  <% end %>
+<% end %>

@@ -1,0 +1,61 @@
+<h3>Patient: <%= @patient.niid_id %> (<%= @patient.lab_id %>)</h3>
+
+<div class="Operator">
+  Operator:
+  <%= current_user.name %>
+</div>
+
+
+<%= form_for(@hla1) do |f| %>
+  <% if @hla1.errors.any? %>
+    <div id="error_explanation">
+	<h2><%= @hla1.errors.count %> errors prohibited your input from being saved:</h2>
+
+      <ul>
+      <% @hla1.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.label :date_exam, 'Date Examined' %>
+    <%= f.date_select :date_exam, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date' %><br>
+
+    <br>
+    <%= f.label :serotype, 'Allele-1:' %>
+    <%= render 'serotype_a', {:f => f} %>
+
+    <%# f.label :allele, 'Allele' %>
+    <%# f.select :gender, Patient.gender.options %><br>
+
+  </div>
+<% end %>
+
+<%= form_for(@hla2) do |f| %>
+  <% if @hla2.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= @hla2.errors.count %> errors prohibited your input from being saved:</h2>
+
+      <ul>
+      <% @hla2.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= f.label :serotype, 'Allele-2:' %>
+    <%= render 'serotype_a', {:f => f} %>
+
+    <%= f.button :homozygote %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
+

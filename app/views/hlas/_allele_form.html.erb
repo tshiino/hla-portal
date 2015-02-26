@@ -1,0 +1,20 @@
+<% case @hla1.type %>
+<% when 'LocusA' %>
+  <% if @chromatid == 1 then %>
+  <%= f.select :allele, @alleles1, { }, { id: "locus_a_allele1" } %>
+  <% else %>
+  <%= f.select :dallele, @alleles2, { }, { id: "locus_a_allele2" } %>
+  <% end %>
+<% when 'LocusB' %>
+  <% if @chromatid == 1 then %>
+  <%= f.select :allele, @alleles1, { }, { id: "locus_b_allele1" } %>
+  <% else %>
+  <%= f.select :dallele, @alleles2, { }, { id: "locus_b_allele2" } %>
+  <% end %>
+<% when 'LocusC' %>
+  <% if @chromatid == 1 then %>
+  <%= f.select :allele, @alleles1, { }, { id: "locus_c_allele1" } %>
+  <% else %>
+  <%= f.select :dallele, @alleles2, { }, { id: "locus_c_allele2" } %>
+  <% end %>
+<% end %>

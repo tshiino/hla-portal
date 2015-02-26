@@ -1,0 +1,24 @@
+<h1>New HLA-A Genotype</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', hlas_path %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#locus_a_serotype1').change(function(){
+      var serotype_name = $('#locus_a_serotype1 option:selected').text();
+      $.get("<%= hlas_serotype_select1_path %>",
+        { serotype_name: serotype_name, locus: 'LocusA' },
+        function(data){ }
+      );
+    });
+    $('#locus_a_serotype2').change(function(){
+      var serotype_name2 = $('#locus_a_serotype2 option:selected').text();
+      $.get("<%= hlas_serotype_select2_path %>",
+        { serotype_name2: serotype_name2, locus: 'LocusA' },
+        function(data){ }
+      );
+    });
+  });
+</script>

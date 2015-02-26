@@ -1,0 +1,24 @@
+<h1>New HLA-B Genotype</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', hlas_path %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#locus_b_serotype1').change(function(){
+      var serotype_name = $('#locus_b_serotype1 option:selected').text();
+      $.get("<%= hlas_serotype_select1_path %>",
+        { serotype_name: serotype_name, locus: "LocusB" },
+        function(data){ }
+      );
+    });
+    $('#locus_b_serotype2').change(function(){
+      var serotype_name2 = $('#locus_b_serotype2 option:selected').text();
+      $.get("<%= hlas_serotype_select2_path %>",
+        { serotype_name2: serotype_name2, locus: 'LocusB' },
+        function(data){ }
+      );
+    });
+  });
+</script>

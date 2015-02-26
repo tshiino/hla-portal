@@ -1,6 +1,10 @@
 class Patient < ActiveRecord::Base
   belongs_to  :country_code, foreign_key: "nationarity"
   belongs_to  :user, foreign_key: "operator_id"
+  has_many :locus_as, dependent: :destroy
+  has_many :locus_bs, dependent: :destroy
+  has_many :locus_cs, dependent: :destroy
+
   include Enumerize
   enumerize :affiliation, :in => [:Vietnam, :Ghana, :India, :Japan]
   enumerize :gender, :in => [:Unknown, :Male, :Female, :Other]

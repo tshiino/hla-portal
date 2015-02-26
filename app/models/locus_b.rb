@@ -1,0 +1,2 @@
+class LocusB < Hla
+end

@@ -63,6 +63,9 @@
 
     <%= f.label :risk %>
     <%= f.select :risk, Patient.risk.options %><br>
+
+    <%= f.label :date_of_art_init, 'Date of ART started' %>
+    <%= f.date_select :date_of_art_init, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date' %><br>
   </div>
 
   <div class="form-actions">

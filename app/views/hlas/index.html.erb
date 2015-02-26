@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing HLA Genotypes</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Niid_ID</th>
+      <th>Lab_ID</th>
+      <th colspan="4">HLA-A</th>
+      <th colspan="4">HLA-B</th>
+      <th colspan="4">HLA-C</th>
+      <th>Patient's Info</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @patients.each do |patient| %>
+      <% a_serotypes = patient.locus_as.pluck("serotype") %>
+      <% a_alleles = patient.locus_as.pluck("allele") %>
+      <% a_allotypes = Array.new %>
+      <% b_serotypes = patient.locus_bs.pluck("serotype") %>
+      <% b_alleles = patient.locus_bs.pluck("allele") %>
+      <% b_allotypes = Array.new %>
+      <% c_serotypes = patient.locus_cs.pluck("serotype") %>
+      <% c_alleles = patient.locus_cs.pluck("allele") %>
+      <% c_allotypes = Array.new %>
+
+      <% for i in [0, 1] %>
+        <% allo = a_serotypes[i].to_s + ':' + a_alleles[i].to_s %>
+        <% a_allotypes << allo %>
+        <% allo = b_serotypes[i].to_s + ':' + b_alleles[i].to_s %>
+        <% b_allotypes << allo %>
+        <% allo = c_serotypes[i].to_s + ':' + c_alleles[i].to_s %>
+        <% c_allotypes << allo %>
+      <% end %>
+      <% a_allotypes.sort! %>
+      <% b_allotypes.sort! %>
+      <% c_allotypes.sort! %> 
+
+      <tr>
+        <td><%= patient.niid_id %></td>
+        <td><%= patient.lab_id %></td>
+        <td><%= a_allotypes[0] %></td>
+        <td><%= a_allotypes[1] %></td>
+        <td><% if a_allotypes[0] == ':' && a_allotypes[1] == ':' %>
+            <%=  link_to 'New', :controller => 'hlas', :action => 'newa', :id => patient %>
+            <% else %>
+            <%=  link_to 'Edit', :controller => 'hlas', :action => 'edita', :id => patient %>
+            <% end %>
+        <td><%= link_to_unless(a_allotypes[0] == ':' && a_allotypes[1] == ':', 'Destroy', {:controller => 'hlas', :action => 'destroy', :id => patient, :locus => 'A' }, data: {:confirm => 'Are you sure?'} ) %></td>
+        <td><%= b_allotypes[0] %></td>
+        <td><%= b_allotypes[1] %></td>
+        <td><% if b_allotypes[0] == ':' && b_allotypes[1] == ':' %>
+            <%=  link_to 'New', :controller => 'hlas', :action => 'newb', :id => patient %>
+            <% else %>
+            <%=  link_to 'Edit', :controller => 'hlas', :action => 'editb', :id => patient %>
+            <% end %>
+        <td><%= link_to_unless(b_allotypes[0] == ':' && b_allotypes[1] == ':', 'Destroy', {:controller => 'hlas', :action => 'destroy', :id => patient, :locus => 'B' }, data: {:confirm => 'Are you sure?'} ) %></td>
+        <td><%= c_allotypes[0] %></td>
+        <td><%= c_allotypes[1] %></td>
+        <td><% if c_allotypes[0] == ':' && c_allotypes[1] == ':' %>
+            <%=  link_to 'New', :controller => 'hlas', :action => 'newc', :id => patient %>
+            <% else %>
+            <%=  link_to 'Edit', :controller => 'hlas', :action => 'editc', :id => patient %>
+            <% end %>
+        <td><%= link_to_unless(c_allotypes[0] == ':' && c_allotypes[1] == ':', 'Destroy', {:controller => 'hlas', :action => 'destroy', :id => patient, :locus => 'C' }, data: {:confirm => 'Are you sure?'} ) %></td>
+        <td><%= link_to 'Show', patient %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
