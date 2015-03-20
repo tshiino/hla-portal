@@ -1,0 +1,61 @@
+<% provide(:title, 'Batch seeding of patients/HLAs/samples data from a CSV file') %>
+<h2><%= yield(:title) %></h2>
+<p>
+Writing a set of patients data en bloc ("batch seeding") is possible in this page.
+</p>
+<div>
+<h4>Instruction</h4>
+<p>
+ The CSV file for the batch seeding must have a close format. 
+ You can get a template Excel file for this purpose from a following link.<br>
+      <%= link_to 'Download Excel Template', {:controller => "patients", :action => "gettemplate"} %>
+</p>
+<ol>
+  <li> First line of the template file composes of an internal name of each column in the system, so that you cannot change this line.
+  <li> The order of the column does not affect the reading. You can change the order as you want.
+  <li> You can upload only new patients' data as well as new sample data for existent patients. Updating entries of existing records are rejected.
+  <li> A strict description of data is required in a certain column, some of which are provided as pull-down menu in Excel. Limits and requirements of every columns are as follows:
+    <ul> 
+      <li><strong>niid_id:</strong> 
+          <font color="red">[mandatory field]</font>&nbsp;
+          This field represents a general patients/sample ID at NIID. It must be unique among all records in the DB.
+      <li><strong>lab_id:</strong>
+          This field represents a patients/sample ID at collection sites. It must be unique among all records in the DB, too.
+      <li><strong>affiliation:</strong>
+          <font color="red">[mandatory field]</font>&nbsp;
+          This field represents a country name of collection sites. You can fill in the field with one of the following words: Vietnam, Ghana, India and Japan.
+      <li><strong>gender:</strong>
+          You can fill in the field with one of the following words: Male, Female, Unknown and Others.
+      <li><strong>nationality:</strong>
+          This field represents a nationality of the patient. It must have an integer value indicating internally a country, i which Vietnam is 2 and Ghana is 3.
+      <li><strong>edu_background:</strong>
+          This is an abbreviation of an educational background. You can fill in the field with one of 10 phrases decided beforehand (refer to the pull-down menu).
+      <li><strong>marital_status:</strong>
+          You can fill in this field with one of the following marital status: Single, Married, Divorced, Widowed and Uncertain.
+      <li><strong>risk:</strong>
+          You can fill in this field with one of 8 phrases representing the risk behavior decided beforehand (refer to the pull-down menu).
+      <li><strong>date_sample_taken:</strong>
+          <font color="red">[mandatory field]</font>&nbsp;
+          Date of blood sample taken is indispensable information in the DB. If you are not concerned in the date, please input 1990-1-1, that is oldest date on this field.
+      <li><strong>art_status:</strong>
+          This field represents an ART status that is demonstrated by boolean (binary value with true or false). True shows a patient receiving ART.
+      <li><strong>cd4_count:</strong>
+          Only numerical value below 10,000 is acceptable. If you want to input >9,999, set 9,999. And if you want to input a result in less than detection limit, set a value of decimals less than 1, e.g. 0.1.
+      <li><strong>viral_load:</strong>
+          Only numerical value below 1x10<sup>8</sup> is acceptable. If you want to input an upper limit of detection, set 999,999,999. And if you want to input a result in less than detection limit, set a value of decimals less than 1, e.g. 0.1.
+    </ul>
+  <li> All date fields must have date before current day. All date fields except for 'date_of_birth' must have date after January 1, 1990.
+  <li> Two alleles and three loci of HLA have to be separated in six columns with a prescribed format, e.g. A*02:01/03. In this format, only the serotype and following ':' are essential, i.e. 'A*' and alleles are arbitrary. In addition, you cannot register &ge;4 alleles at the same time.
+  </ol>
+</ol>
+</div>
+
+<div class="panel-body">
+  <%= form_tag( patients_import_path, :method => :post, multipart: true) do %>
+    <div class="form-group">
+      <%= file_field_tag :csv_file %><br>
+    </div>
+    <%= submit_tag "Seed This Data", :class => "btn btn-primary" %>
+  <% end %>
+</div>
+<%= link_to 'Back', patients_path %>

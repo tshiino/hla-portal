@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226081130) do
+ActiveRecord::Schema.define(version: 20150227025419) do
 
   create_table "allele_master_as", force: :cascade do |t|
     t.string   "name",                 limit: 16
@@ -113,6 +113,24 @@ ActiveRecord::Schema.define(version: 20150226081130) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "samples", force: :cascade do |t|
+    t.integer  "patient_id",        limit: 4
+    t.date     "date_sample_taken"
+    t.boolean  "art_status",        limit: 1
+    t.string   "art_formula",       limit: 64
+    t.float    "cd4_count",         limit: 24
+    t.date     "date_cd4_exam"
+    t.float    "viral_load",        limit: 24
+    t.string   "condition",         limit: 32
+    t.string   "remarks",           limit: 255
+    t.integer  "operator_id",       limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "samples", ["art_status", "cd4_count", "viral_load"], name: "index_samples_on_art_status_and_cd4_count_and_viral_load", using: :btree
+  add_index "samples", ["patient_id"], name: "index_samples_on_patient_id", using: :btree
+
   create_table "serotype_master_as", force: :cascade do |t|
     t.string   "name",       limit: 4
     t.integer  "priority",   limit: 4
@@ -152,4 +170,5 @@ ActiveRecord::Schema.define(version: 20150226081130) do
   add_foreign_key "allele_master_bs", "serotype_master_bs"
   add_foreign_key "allele_master_cs", "serotype_master_cs"
   add_foreign_key "hlas", "patients"
+  add_foreign_key "samples", "patients"
 end

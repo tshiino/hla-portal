@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Serial Number:</strong>
+  <%= @sample.id %>
+</p>
+
+<p>
+  <strong>Patient:</strong>
+  <%= @sample.patient.niid_id %>
+</p>
+
+<p>
+  <strong>Date sample taken:</strong>
+  <%= @sample.date_sample_taken %>
+</p>
+
+<p>
+  <strong>ART status:</strong>
+  <% if @sample.art_status then %>
+    Treaten
+  <% else %>
+    na&#239;ve
+  <% end %>
+</p>
+
+<p>
+  <strong>ART regimen:</strong>
+  <%= @sample.art_formula %>
+</p>
+
+<p>
+  <strong>CD4 count:</strong>
+  <% if @sample.cd4_count < 1 then %>
+    Not detected
+  <% elsif @sample.cd4_count > 9998 then %>
+    Above the upper limit of quantitation
+  <% else %>
+    <%= @sample.cd4_count.round(1) %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Date CD4 diagnosed:</strong>
+  <%= @sample.date_cd4_exam %>
+</p>
+
+<p>
+  <strong>Viral Load:</strong>
+  <% if @sample.viral_load == 0 then %>
+    Not detected
+  <% elsif @sample.viral_load > 999999999 then %>
+    Above the upper limit of quantitation
+  <% else %>
+    <%= @sample.viral_load.round(1) %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Condition of the patient:</strong>
+  <%= @sample.condition %>
+</p>
+
+<p>
+  <strong>Remarks:</strong>
+  <%= @sample.remarks %>
+</p>
+
+<p>
+  <strong>Operator:</strong>
+  <%= User.find(@sample.operator_id).name %>
+</p>
+
+<%= link_to 'Edit', edit_sample_path(@sample) %> |
+<%= link_to 'Back', samples_path %>

@@ -13,6 +13,11 @@ HlaPortal::Application.routes.draw do
   get 'locus_as/show', to: 'patients#show'
   get 'locus_bs/show', to: 'patients#show'
   get 'locus_cs/show', to: 'patients#show'
+  get 'samples/new'
+  get 'patients/seeding', to: 'patients#seeding'
+  get 'patients/gettemplate'
+
+  post 'patients/import', to: 'patients#import'
 
   resources :users do
     member do
@@ -23,7 +28,7 @@ HlaPortal::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :patients
+  resources :patients, only: [:index, :new, :edit, :create, :update, :show, :destroy]
   resources :hlas, only: [:index]
   resources :locus_as, only: [:new, :create], controller: :hlas
   resources :locus_a, only: [:edita, :update], controller: :hlas
@@ -31,6 +36,7 @@ HlaPortal::Application.routes.draw do
   resources :locus_b, only: [:editb, :update], controller: :hlas
   resources :locus_cs, only: [:new, :create], controller: :hlas
   resources :locus_c, only: [:editc, :update], controller: :hlas
+  resources :samples
 
   root  'static_pages#top'
   match '/help',    to: 'static_pages#help',    via: 'get'

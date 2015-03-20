@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Samples' Information</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>NIID_ID</th>
+      <th>Lab_ID</t>
+      <th>S/N</th>
+      <th>Date sample taken</th>
+      <th>ART status</th>
+      <th>ART formula</th>
+      <th>CD4 (/&#13205;)</th>
+      <th>Date CD4 exam</th>
+      <th>VL (/&#13206;)</th>
+      <th>Condition</th>
+      <th colspan="4">Operate</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @patients.each do |patient| %>
+      <tr>
+        <td><%= patient.niid_id %></td>
+        <td><%= patient.lab_id %></td>
+      <% samples_for_patient = @samples.where( patient_id: patient.id ) %>
+      <% if samples_for_patient.exists? then %>
+        <% samples_for_patient.each_with_index do |sample, i| %>
+          <% if i >= 1 then %>
+          <tr><td></td><td>&emsp;&emsp;&#8627;</td>
+          <% end %>
+          <td><%= sample.id %></td>
+          <td><%= sample.date_sample_taken %></td>
+          <td>
+            <% if sample.art_status == false then %>
+              na&#239;ve
+            <% else %>
+              treaten
+            <% end %></td>
+          <td><%= sample.art_formula %></td>
+          <td>
+            <% if sample.cd4_count < 1 then %>
+              < LOD
+            <% elsif sample.cd4_count > 9998 then %>
+              > LOD
+            <% else %>
+              <%= sample.cd4_count.round(1) %>
+            <% end %></td>
+          <td><%= sample.date_cd4_exam %></td>
+          <td>
+            <% if sample.viral_load < 1 then %>
+              < LOD
+            <% elsif sample.viral_load > 999999998 then %>
+              > LOD
+          <% else %>
+              <%= sample.viral_load.round(1) %>
+            <% end %></td>
+          <td><%= sample.condition %></td>
+          <td><%= link_to 'Show', sample %></td>
+          <td><%= link_to 'Edit', edit_sample_path(sample) %></td>
+          <td><%= link_to 'Destroy', sample, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if i == 0 then %>
+            <td><%= link_to 'Add', :controller => 'samples', :action => 'new', id: patient %></td>
+          <% end %>
+        </tr>
+          <% END { p "</tr>" } %>
+        <% end %>
+      <% else %>
+        <td colspan="7"></td>
+        <td colspan="3"><%= link_to 'New Sample', :controller => 'samples', :action => 'new', id: patient %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

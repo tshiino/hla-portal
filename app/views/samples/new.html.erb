@@ -1,0 +1,10 @@
+<h1>New Sample</h1>
+<h3>Patient: <%= @patient.niid_id %> (<%= @patient.lab_id %>)</h3>
+<div class="Operator">
+  Operator:
+  <%= current_user.name %>
+</div>
+
+<%= render 'form' %>  
+<br>
+<%= link_to 'Back', samples_path %>

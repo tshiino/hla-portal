@@ -1,4 +1,5 @@
 class PatientsController < ApplicationController
+
   before_action :signed_in_user, only: [:index, :show, :new, :edit, :update, :create, :destroy]
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
@@ -79,6 +80,120 @@ class PatientsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to patients_url }
       format.json { head :no_content }
+    end
+  end
+
+  def seeding
+  end
+
+  def gettemplate
+    file_name="seeding_template.xlsx"
+    filepath = Rails.root.join('public',file_name)
+    stat = File::stat(filepath)
+    send_file(filepath, :filename => file_name, :length => stat.size)
+  end
+
+  def import
+    if params[:csv_file].blank?
+      redirect_to(patients_path, alert: 'Select CSV file to seed')
+    else
+      test = Hash.new
+      nums, invs, exts = 0, 0, 0
+      numh, invh, exth = 0, 0, 0
+      opid = current_user.id
+      nump, invp, extp = Patient.import(params[:csv_file], opid)
+      open(params[:csv_file].path, mode = "r", perm = 0666) do |f|
+        seeds = CSV.new(f, :headers => :first_row)
+        seeds.each do |r|
+          next if r.header_row?
+          record = Hash[[r.headers, r.fields].transpose]
+          pid = Patient.find_by(:niid_id => record["niid_id"]).id
+          sample_table = record.slice("date_sample_taken", "art_status", "art_formula", "cd4_count", "date_cd4_exam", "viral_load", "condition", "remarks")
+          sample_table.store("patient_id", pid)
+          sample_table.store("operator_id", current_user.id)
+          ns, is, es = Sample.import(sample_table)
+          nums += ns
+          invs += is
+          exts += es
+          hla_table = record.slice("date_exam", "HLA_A1", "HLA_A2", "HLA_B1", "HLA_B2", "HLA_C1", "HLA_C2")
+          atimes, btimes, ctimes = 0, 0, 0
+          hla_table.each do |k, g|
+            next if k == "data_exam"
+            if /^HLA_A[12]/ =~ k
+              atimes += 1
+              if /^(?:A\*)?(\d\d)/ =~ g
+                serotype = $1
+                homo = false
+                if atimes == 1 then
+                  tally = serotype
+                else
+                  homo = true if tally == serotype
+                end
+                /:(\d\d(?:\/\d\d)*)$/ =~ g
+                allele = $1
+                locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => serotype, "allele" => allele, "homo" => homo, "operator_id" => current_user.id }
+                nh, ih, eh = LocusA.import(locus_table)
+                numh += nh
+                invh += ih
+                exth += eh
+              else
+                locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => "00", "allele" => "00", "homo" => false, "operator_id" => current_user.id }
+                nh, ih, eh = LocusA.import(locus_table)
+                next
+              end
+            elsif /^HLA_B[12]/ =~ k
+              btimes += 1
+              if /^(?:B\*)?(\d\d)/ =~ g
+                serotype = $1
+                homo = false
+                if atimes == 1 then
+                  tally = serotype
+                else
+                  homo = true if tally == serotype
+                end
+                /:(\d\d(?:\/\d\d)*)$/ =~ g
+                allele = $1
+                locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => serotype, "allele" => allele, "homo" => homo, "operator_id" => current_user.id }
+                nh, ih, eh = LocusB.import(locus_table)
+                numh += nh
+                invh += ih
+                exth += eh
+              else
+                locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => "00", "allele" => "00", "homo" => false, "operator_id" => current_user.id }
+                nh, ih, eh = LocusB.import(locus_table)
+                next
+              end
+            elsif /^HLA_C[12]/ =~ k
+              ctimes += 1
+              if /^(?:C\*)?(\d\d)/ =~ g
+                serotype = $1
+                homo = false
+                if atimes == 1 then
+                  tally = serotype
+                else
+                  homo = true if tally == serotype
+                end
+                /:(\d\d(?:\/\d\d)*)$/ =~ g
+                allele = $1
+                locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => serotype, "allele" => allele, "homo" => homo, "operator_id" => current_user.id }
+                nh, ih, eh = LocusC.import(locus_table)
+                numh += nh
+                invh += ih
+                exth += eh
+              else
+                locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => "00", "allele" => "00", "homo" => false, "operator_id" => current_user.id }
+                nh, ih, eh = LocusC.import(locus_table)
+                next
+              end
+            else
+              next
+            end
+            test = locus_table
+          end
+        end 
+      end
+      num = [nump, nums, numh]
+      redirect_to(patients_path, notice: "Add #{num.max.to_s} records except #{invp.to_s} invalid and #{extp.to_s} existent patients, #{invs.to_s} invalid and #{exts.to_s} existent samples, and #{invh.to_s} invalid and #{exth.to_s} existent HLA alleles. #{test}")
     end
   end
 

@@ -1,5 +1,5 @@
 class HlasController < ApplicationController
-  before_action :signed_in_user, only: [:index, :new, :newa , :newb, :newc, :edit, :edita, :editb, :editc, :update, :create, :destroy]
+  before_action :signed_in_user, only: [:index, :new, :newa, :newb, :newc, :edit, :edita, :editb, :editc, :update, :create, :destroy]
   before_action :set_patient, only: [:edita, :editb, :editc, :newa, :newb, :newc, :destroy]
   before_action :set_hlas, only: [:edita, :editb, :editc, :update]
   before_action :set_locus_as, only: [:edita]

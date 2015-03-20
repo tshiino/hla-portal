@@ -1,0 +1,57 @@
+<%= form_for(@sample) do |f| %>
+  <% if @sample.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sample.errors.count, "error") %> prohibited this sample from being saved:</h2>
+
+      <ul>
+      <% @sample.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <% @sample.patient_id = @patient.id %>
+    <%= f.hidden_field :patient_id %>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :date_sample_taken, 'Date the sample taken' %>
+    <%= f.date_select :date_sample_taken, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :inculde_blank => true, :class => 'date' %><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :art_status, 'Getting ART?' %>
+    <%= f.check_box :art_status %>&rarr;Yes.<br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :art_formula, 'ART regimen' %>
+    <%= f.text_field :art_formula %><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :cd4_count, 'CD4 count' %>
+    <%= f.text_field :cd4_count %>
+    <input id=CD4LDL type=button data-remote="true" value="< Lower Detection Limit">    
+    <input id=CD4UDL type=button data-remote="true" value="> Upper Detection Limit"><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :date_cd4_exam, 'Date CD4 diagnosed' %>
+    <%= f.date_select :date_cd4_exam, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :inculde_blank => true, :class => 'date' %><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :viral_load, 'Viral Load' %>
+    <%= f.text_field :viral_load %>
+    <input id=VLLDL type=button data-remote="true" value="< Lower Detection Limit"> 
+    <input id=VLUDL type=button data-remote="true" value="> Upper Detection Limit"><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :condition, 'Condition of the Patient' %>
+    <%= f.text_field :condition %><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :remarks, 'Remarks' %>
+    <%= f.text_field :remarks %><br>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

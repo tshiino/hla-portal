@@ -91,10 +91,16 @@
 </p>
 
 <p>
+  <strong>Samples stored:</strong>
+  <%= @patient.samples.count %>
+</p>
+
+<p>
   <strong>Operator:</strong>
   <%= @operator_name %>
 </p>
 
 <%= link_to 'Edit', edit_patient_path(@patient) %> |
 <%= link_to 'Back to Patients', patients_path %> |
-<%= link_to 'Back to HLAs', hlas_path %>
+<%= link_to 'Back to HLAs', hlas_path %> |
+<%= link_to 'Go to Samples', samples_path %>

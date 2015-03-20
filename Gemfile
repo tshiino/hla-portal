@@ -15,6 +15,8 @@ gem 'rails-erd', '~>1.2'
 gem 'enumerize' 
 gem 'enum_help'
 gem 'simple_form'
+gem 'jquery-turbolinks'
+gem 'bio'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
