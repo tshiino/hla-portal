@@ -1,0 +1,2 @@
+class NucleotideRef < RefMaster
+end

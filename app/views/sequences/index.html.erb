@@ -1,0 +1,69 @@
+<% provide(:title, 'Listing Sequences\' Information') %>
+<h2><%= yield(:title) %></h2>
+<table>
+  <thead>
+    <tr>
+      <th>NIID_ID</th>
+      <th>S/N</th>
+      <th>Read</th>
+      <th>Gene</th>
+      <th>clone</th>
+      <th>prov.</th>
+      <th><%= image_tag "hxb2genemap.png", :width => "243", :class => "gene-head" %></th>
+      <th>length</th>
+      <th>Subtype</th>
+      <th>Acc.No.</th>
+      <th colspan="4">Operate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @patients.each do |patient| %>
+      <% samples_for_patient = @samples.where( patient_id: patient.id ) %>
+      <% if samples_for_patient.exists? then %>
+        <tr>
+        <td><%= patient.niid_id %></td>
+        <% samples_for_patient.each_with_index do |sample, i| %>
+          <% if i >= 1 then %>
+            <tr><td>&emsp;&emsp;&#8627;</td>
+          <% end %>
+          <td><%= sample.id %></td>
+          <% sequences_for_sample = @sequences.where( sample_id: sample.id ) %>
+          <% if sequences_for_sample.exists? then %>
+            <td></td><td></td><td></td><td></td><td>Add new sequence</td>
+            <% sequences_for_sample.each do |sequence| %>
+              <% if sequence.read > 0 then %>
+                <tr><td></td><td>&emsp;&emsp;&#8627;</td>
+              <% end %>
+              <td><%= sequence.read %></td>
+              <td><%= sequence.gene %></td>
+              <td><%= sequence.clonal %></td>
+              <td><%= sequence.provirus %></td>
+              <td><% if sequence.start != nil && sequence.end != nil %>
+                    <%= image_tag "graphbar-gray.gif", :width => sequence.start.to_i / 40, :class => "gene-map" %><%= image_tag "graphbar-green.gif", :width => (sequence.end.to_i - sequence.start.to_i) / 40, :class => "gene-map" %><%= image_tag "graphbar-gray.gif", :width => (9720 - sequence.end.to_i) / 40, :class => "gene-map" %>
+                  <% else %>
+                    <% st = GeneMaster.find_by(name: sequence.gene).start.to_i %>
+                    <% en = GeneMaster.find_by(name: sequence.gene).end.to_i %>
+                    <%= image_tag "graphbar-gray.gif", :width => st / 40, :class => "gene-map" %><%= image_tag "graphbar-red.gif", :width => (en - st) / 40, :class => "gene-map" %><%= image_tag "graphbar-gray.gif", :width => (9720 - en) / 40, :class => "gene-map" %>
+                  <% end %>
+                  </td>
+              <td><%= sequence.length %></td>
+              <td><%= sequence.subtype_code %></td>
+              <td><%= sequence.accession %></td>
+              <td><%= link_to 'Show', sequence %></td>
+              <td><%= link_to 'Edit', edit_sample_path(sample) %></td>
+              <td><%= link_to 'Destroy', sequence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+          <% else %>
+            <td colspan="7">Submit a sequence</td>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <tr></tr>
+</table>
+<div class="actions">
+  <p>
+  <%= link_to 'Upload FASTA alignment of sequences', sequences_upload_path %>
+  &emsp;&emsp;
+  </p>
+</div>

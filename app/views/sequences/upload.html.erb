@@ -1,0 +1,70 @@
+<% provide(:title, 'Upload viral nucleotide sequences using FASTA file') %>
+<h2><%= yield(:title) %></h2>
+<p>
+<div>
+<h4>Instruction</h4>
+<p>
+This form allows to upload a large number of viral gene sequences in a lump with a FASTA file. Only DNA sequence and its proparties are nessesary to input, and protein sequence and mutation data are automatically calculated in the system. In uploading procedure, the system requires an appropriate formatof FASTA file with being exactly aligned to HXB2 and bearing sequence properties in comment-line of each entry. <%= link_to "Detailed information on preparation of the FASTA file is here", help_path(:anchor => 'FASTA') %>.
+</p>
+<p>
+Before uploading a FASTA file, you have to input a name of gene sequenced, HXB coodinates of a range of the sequence set and codon position (same as 
+<%= link_to "codon_start in GenBank format", "http://www.ddbj.nig.ac.jp/sub/cds-e.html#frame", :target => "_blank" %>).
+These values can also put in a FASTA comment-line, but you'd better to input these in this form because these must be same in all of entries in the FASTA file. Date of sequencing performed is optional. If your sequence set is from a clonal sequencing, or proviral samples (i.e. DNA), you should check a corresponding field.
+</p>
+</div>
+<%= form_tag( sequences_import_path, :method => :post, multipart: true) do %>
+  <% if @sequence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sequence.errors.count, "error") %> prohibited this sequence file from being saved:</h2>
+      <ul>
+      <% @sequence.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-inputs">
+    <%= label :date_seq, 'Date Sequenced' %>
+    <%= date_select :sequence, :date_seq, :use_short_month => true, :start_year => 2014 %><br>
+  </div>
+  <div class="form-inputs">
+    <%= label :gene, 'Gene/Region' %>
+    <%= collection_select :sequence, :gene, GeneMaster.all, :name, :name, :prompt => "Select gene." %> <font color="red">&emsp;Required.<br></font>
+  </div>
+  <div class="form-inputs">
+    <%= label :start, 'Range start from:' %>
+    <%= text_field :sequence, :start %> <font color="red">&emsp;Required.</font>
+    <%= label :end, ' end to:' %>
+    <%= text_field :sequence, :end %><br>
+  </div>
+  <div class="form-inputs">
+    <%= label :codon_start, 'Codon start at:' %>
+    <%= select :sequence, :codon_start, %i(1 2 3) %><br>
+  </div>
+  <div class="form-inputs">
+    <%= label :clonal, 'Are these clonal sequences?' %>
+    <%= check_box :sequence, :clonal %>&rarr;Yes.<br>
+  </div>
+  <div class="form-inputs">
+    <%= label :provirus, 'Are these proviral sequences?' %>
+    <%= check_box :sequence, :provirus %>&rarr;Yes.<br>
+  </div>
+
+  <div class="form-group">
+    <%= file_field_tag :fasta_file, :class => "btn btn-primary" %>
+  </div>
+  <div class="form-actions">
+    <%= submit_tag "Upload the FASTA file", :class => "btn btn-primary" %>
+  </div>
+<% end %>
+<!--
+<div class="panel-body">
+  <%= form_tag( sequences_import_path, :method => :post, multipart: true) do %>
+    <div class="form-group">
+      <%= file_field_tag :fasta_file %><br>
+    </div>
+    <%= submit_tag "Upload the FASTA file", :class => "btn btn-primary" %>
+  <% end %>
+</div>
+-->
+<%= link_to 'Back', sequences_path %>

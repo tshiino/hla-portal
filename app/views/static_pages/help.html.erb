@@ -1,22 +1,104 @@
 <% provide(:title, 'Help') %>
 <h2><%= yield(:title) %></h2>
+<div>
   <h4>Account</h4>
-    <ul>
-      <li>How to sign up our system.
-      <li>How to sign in.
-      <li>How to edit your user profile.
-      <li>How to change the password.
-      <li>What is "gravatar"?
-      <li>How to set a gravatar image what you like.
-    </ul>
+    <dl>
+      <dt>How to sign up our system.
+      <dd>To join ARC HLA Portal system, you need to sign up by send
+          a e-mail to an administrator using below format.<br>
+          <p>
+          To: tshiino@niid.go.jp<br>
+          Subject: Request for account for HLA Portal.<br>
+          ----------------------------------------------------------<br>
+          APPLICATION FORM FOR SIGN UP<br>
+          Applicant's name:   Your Name<br>
+          e-mail address:     Please write valid address<br>
+          Affiliation:        NIID, NIHE or NMIHR<br>
+          Initial password:   xxxxxxxx<br>
+          </p>
+          In a few days, you will receive a letter of consent.
+      <dt>How to sign in.
+      <dt>How to edit your user profile.
+      <dt>How to change the password.
+      <dt>What is "gravatar"?
+      <dt>How to set a gravatar image what you like.
+    </dl>
   <h4>Top page</h4>
-    <ul>
-      <li>What is displayed in the left column?
-      <li>How to see other users accounting.
-    </ul>
+    <dl>
+      <dt>What is displayed in the left column?
+      <dt>How to see other users accounting.
+    </dl>
   <h4>Micropost</h4>
 
   <h4>Database</h4>
-    <p>Sorry. Database application is now under construction.</p>
-
+    <dl>
+      <dt><a name="Seeding"></a>How to seed many patients/samples data in database.
+      <dd>Uploading a set of patients data en bloc is possible in <%= link_to 'Batch seeding page', patients_seeding_path %> using a suitable CSV file. Excel-based template file for a batch seeding is distributed in the page. Strict description of data are required in the seeding file, some of which are provided as pull-down menu in the Excel template. Limits and requirements of every colomn are as follows:
+      <ul> 
+        <li><strong>niid_id:</strong> 
+          <font color="red">[mandatory field]</font>&nbsp;
+          This field represents a general patients/sample ID at NIID. It must be unique among all records in the DB.
+        <li><strong>lab_id:</strong>
+          This field represents a patients/sample ID at collection sites. It must be unique among all records in the DB, too.
+        <li><strong>affiliation:</strong>
+          <font color="red">[mandatory field]</font>&nbsp;
+          This field represents a country name of collection sites. You can fill in the field with one of the following words: Vietnam, Ghana, India and Japan.
+        <li><strong>gender:</strong>
+          You can fill in the field with one of the following words: Male, Female, Unknown and Others.
+        <li><strong>nationality:</strong>
+          This field represents a nationality of the patient. It must have an integer value indicating internally a country, i which Vietnam is 2 and Ghana is 3.
+        <li><strong>edu_background:</strong>
+          This is an abbreviation of an educational background. You can fill in the field with one of 10 phrases decided beforehand (refer to the pull-down menu).
+        <li><strong>marital_status:</strong>
+          You can fill in this field with one of the following marital status: Single, Married, Divorced, Widowed and Uncertain.
+        <li><strong>risk:</strong>
+          You can fill in this field with one of 8 phrases representing the risk behavior decided beforehand (refer to the pull-down menu).
+        <li><strong>date_sample_taken:</strong>
+          <font color="red">[mandatory field]</font>&nbsp;
+          Date of blood sample taken is indispensable information in the DB. If you are not concerned in the date, please input 1990-1-1, that is oldest date on this field.
+        <li><strong>art_status:</strong>
+          This field represents an ART status that is demonstrated by boolean (binary value with true or false). True shows a patient receiving ART.
+        <li><strong>cd4_count:</strong>
+          Only numerical value below 10,000 is acceptable. If you want to input >9,999, set 9,999. And if you want to input a result in less than detection limit, set a value of decimals less than 1, e.g. 0.1.
+        <li><strong>viral_load:</strong>
+          Only numerical value below 1x10<sup>8</sup> is acceptable. If you want to input an upper limit of detection, set 999,999,999. And if you want to input a result in less than detection limit, set a value of decimals less than 1, e.g. 0.1.
+        <li><strong>Date fields:</strong>
+          All date fields must have date before current day. All date fields except for 'date_of_birth' must have date after January 1, 1990.
+        <li><strong>HLA Genotype:</strong>
+          Two alleles and three loci of HLA have to be separated in six columns with a prescribed format, e.g. A*02:01/03. In this format, only the serotype and following ':' are essential, i.e. 'A*' and alleles are arbitrary. In addition, you cannot register &ge;4 alleles at the same time.
+      </ul>
+      <dt><a name="FASTA"></a>How to make a FASTA file for upload many sequences.
+      <dd>To upload viral gene sequences in a lamp in 'Database'->'Sequence'
+          menu, you have to prepare a FASTA format DNA sequence alignment 
+          file according to the following points.
+        <ol>
+          <li>Pile up all DNA sequences with same gene/range in one project using MEGA Alignment Explorer.
+          <li>Change each sequence name to corresponding patient's ID (NIID ID) to give a patient-sample-sequence relationship to the system.
+          <li>Add appropriate region of HXB2-LAI-IIIB-BRU reference sequence (available in a subtype alignment of <%=  link_to 'HIV sequence alignments in LosAlamos DB', 'http://www.hiv.lanl.gov/content/sequence/NEWALIGN/align.html', :target => "_blank" %>) to the project.
+          <li>Perform multiple alignment using Muscle or ClustalW function.
+          <li>Trancate the alignmented data to a specific gene region if possible.
+          <li>Correct gaps (indicated in '-') using HXB2 reference and translated protein sequences.
+          <li>Carefully observe HXB2 line to search gaps to HXB2 sequence against each sample sequence, and record the start-end position (not coodinates, but just 'site #' at bottom-left of MEGA window) of the insertion sequence to each the sample in your notebook.
+          <li>Access <%= link_to 'LosAlamos DB', 'http://www.hiv.lanl.gov/content/sequence/HIV/mainpage.html', :target => "_blank" %> and go to 'Tools'->'<%= link_to 'Sequence Locator', 'http://www.hiv.lanl.gov/content/sequence/LOCATE/locate.html', :target => "_blank" %>.
+          <li>Paste one of your sequence from MEGA project to the Locator's box,and submit it.
+          <li>Note a corresponding HXB2 coodinates (start # and end #) to your notebook.
+          <li>In MEGA, choose 'Data'->'Export Alignment'->'FASTA format' to save the project to a FASTA file.
+          <li>Open the FASTA file by notepad or other text editor in your PC, and add following comment-line to each sequence id.
+          <ul>
+            <li>In general: string followed by '|' after the sequence id is a comment-line. Each field in the comment-line is split by '|'. Field (a comment) composed by "command=value", e.g. field for codon start is as "codon=1".
+            <li>Sample id: field start at "sn=" represents a sample id using in the sequencing. You should put a sample id indidated by 's/n' in 'Database->sample' index (e.g. sn=99). If you don't put this field, oldest sample entry of the patient is adopted to sample id.
+            <li>Insertion: field start at "ins=" represents insertions list compared to HXB2 sequence. This is a mandatory field if the sequence has insertions. You have to put each start-end site number, which should have been already recorded in your notebook, separated by commas (e.g. ins=12-17,120-128). If you make a mistake this field, auto-identification of mutations is disturbed.
+            <li>Subtype: field start at "subtype=" represents a subtype belonging. This field is omissible but describes with a subtype code (e.g. subtype=01 for CRF01_AE) if you wish to input.
+            <li>Codon_start: field start at "codon=" represents a position of codon starting. This field is usually given by input form of upload page.
+            <li>Range: field start at "range=" represents a range of the sequence in HXB2 coodinates. This field is usually given by input form of upload page.
+            <li>Gene: field start at "gene=" represents a gene sequenced. This field is usually given by input form of upload page.
+            <li>Date: field start at "date=" represents a date of sequencing. This field is usually given by input form of upload page.
+            <li>Clonal and provirus: field "clonal=true" and "provirus=true" represents a clonal and provirus sequence, respectively. This field is usually given by input form of upload page.
+            <li>An example of a comment-line with a sequence id is as followed:<br>
+            >G13a001|sn=7|ins=1424-1434,1471-1476|subtype=02|codon=2|date=2012-1-12
+          </ul>
+          <li>Save the FASTA file and <%= link_to 'go to upload page', sequences_upload_path %> to upload sequences. Only sample sequences (laveled by patient id) will be added to the database.
+        </ol>
+    </ul>
+</div>
 <p>This is help page for the Database site.</p>

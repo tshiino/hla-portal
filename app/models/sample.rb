@@ -1,11 +1,14 @@
 class Sample < ActiveRecord::Base
   belongs_to :patient
+  has_many :sequences, dependent: :destroy
+
+  enum serostatus: %i( Unconfirmed HIV-1 HIV-2 Dual )
 
   validates :patient_id, presence: true
   validates :date_sample_taken, presence:true
   validates :art_status, inclusion: { in: [true, false] }
   validates :cd4_count, numericality: { :greater_than_or_equal_to => 0, :less_than => 10000 }
-  validates :viral_load, numericality: { :greater_than_or_equal_to => 0, :less_than => 100000000 }
+  validates :viral_load, numericality: { :greater_than_or_equal_to => 0, :less_than => 1000000000 }
   validates :remarks, length: { :maximum => 255, :too_long => "Maximum length is 255 letters!!" }
   validates :operator_id, presence: true
 

@@ -1,5 +1,21 @@
 HlaPortal::Application.routes.draw do
 
+  get 'sequences/new'
+
+  get 'sequences/index'
+
+  get 'sequences/edit'
+
+  get 'sequences/update'
+
+  get 'sequences/create'
+
+  get 'sequences/destroy'
+
+  get 'sequences/upload'
+
+  get 'sequences/import'
+
   get 'hlas/serotype_select1', to: 'hlas#serotype_select1'
   get 'hlas/serotype_select2', to: 'hlas#serotype_select2'
   get 'hlas/destroy'
@@ -16,8 +32,10 @@ HlaPortal::Application.routes.draw do
   get 'samples/new'
   get 'patients/seeding', to: 'patients#seeding'
   get 'patients/gettemplate'
+  get 'sequences/upload', to: 'sequences#upload' 
 
   post 'patients/import', to: 'patients#import'
+  post 'sequences/import', to: 'sequences#import'
 
   resources :users do
     member do
@@ -37,6 +55,8 @@ HlaPortal::Application.routes.draw do
   resources :locus_cs, only: [:new, :create], controller: :hlas
   resources :locus_c, only: [:editc, :update], controller: :hlas
   resources :samples
+  resources :sequences
+  resources :mutations, controller: :mutations
 
   root  'static_pages#top'
   match '/help',    to: 'static_pages#help',    via: 'get'

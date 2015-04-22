@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sequence Name:</strong>
+  <%= @patient.niid_id %>-<%= sprintf("%04d", @sample.id) %>-<%= sprintf("%02d", @sequence.read) %>_<%= @sequence.gene.downcase %>
+<br>
+  <strong>HXB2 Coordinates:</strong>
+  <%= @sequence.start %> - <%= @sequence.end %>
+</p>
+
+<div class="gbheader">
+<p>
+  ACCESSION&nbsp;&nbsp;&nbsp;
+</p>
+<p>
+  <%= @sequence.accession %>
+  FEATURES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Location/Qualifiers</p>
+</p>
+  <div class="gbfeatures">
+    <p>
+    source&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1..<%= @sequence.length %><br>
+    /organism="Human Immunodeficiency Virus 1"<br>
+    /patient="<%= @patient.niid_id %>"<br>
+    /collection_date="<%= @sample.date_sample_taken %>"<br>
+    /country="<%= CountryCode.find(@patient.nationarity).country %>"<br>
+    /sex="<%= @patient.gender %>"<br>
+    /isolate="<%= @sample.id %>"<br>
+    /clone="<%= @sequence.read %>"
+    <p>
+    CDS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1..<%= @sequence.length %><br>
+    /gene="<%= @sequence.gene.downcase %>"<br>
+    /codon_start="<%= @sequence.codon_start %>"<br>
+    /translation="<%= @sequence.translation.gsub(/\-/, "") %>"
+    </p>
+  </div>
+  <p>
+  BASE COUNT     <%= @seqcompo["a"] %>&nbsp;a&emsp;
+                 <%= @seqcompo["c"] %>&nbsp;c&emsp;
+                 <%= @seqcompo["g"] %>&nbsp;g&emsp;
+                 <%= @seqcompo["t"] %>&nbsp;t<br>
+  ORIGIN</p>
+</div>
+<div class="seqfigure">
+  <pre>
+  <% @figure.each_with_index do |line, i| %>
+    <%= sprintf("%4d %s %-4d", line[0], line[1].upcase, line[2]) %>
+    <% if i % 2 == 1 then %>
+         <%= @inslines[(i+1)/2 - 1] %>
+    <% end %> 
+  <% end %>
+  </pre>
+  <p>Insertions to HXB2: <%= @sequence.insertion %>: are shown in '^'.</p>
+  <p>Mutations from HXB2 are shown as [X].</p>
+  <p>&emsp;<%= link_to 'Show a list of mutations', mutation_path %></p>
+</div>
+
+<%= link_to 'Edit', edit_sequence_path(@sequence) %> |
+<%= link_to 'Back', sequences_path %>

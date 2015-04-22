@@ -5,6 +5,7 @@ class Patient < ActiveRecord::Base
   has_many :locus_bs, dependent: :destroy
   has_many :locus_cs, dependent: :destroy
   has_many :samples, dependent: :destroy
+  has_many :sequences, through: :samples, dependent: :destroy
 
   include Enumerize
   enumerize :affiliation, :in => [:Vietnam, :Ghana, :India, :Japan]
@@ -50,32 +51,32 @@ class Patient < ActiveRecord::Base
           patient = Patient.new
           patient.niid_id = table["niid_id"]
           patient.lab_id = table["lab_id"]
-          patient.affiliation = table["affiliation"]
+          patient.affiliation = table["affiliation"].strip
           patient.hosp_id = table["hosp_id"]
           patient.date_of_birth = table["date_of_birth"]
           patient.date_diagnosed = table["date_diagnosed"]
           if table["gender"].present? then
-            patient.gender = table["gender"]
+            patient.gender = table["gender"].strip
           else
             patient.gender = "Unknown"
           end
           if table["nationality"].present? then
-            patient.nationarity = table["nationality"]
+            patient.nationarity = table["nationality"].strip
           else
             patient.nationarity = "1"
           end
           if table["edu_background"].present? then
-            patient.edu_background = table["edu_background"]
+            patient.edu_background = table["edu_background"].strip
           else
             patient.edu_background = "Unconfirmed"
           end
           if table["marital_status"].present? then
-            patient.marital_status = table["marital_status"]
+            patient.marital_status = table["marital_status"].strip
           else
             patient.marital_status = "Uncertain"
           end
           if table["risk"].present? then
-            patient.risk = table["risk"]
+            patient.risk = table["risk"].strip
           else
             patient.risk = "Unidentified"
           end

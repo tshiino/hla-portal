@@ -20,6 +20,10 @@
     <%= f.date_select :date_sample_taken, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :inculde_blank => true, :class => 'date' %><br>
   </div>
   <div class="form-inputs">
+    <%= f.label :serostatus, 'Serostatus' %>
+    <%= f.select :serostatus, %i(Unconfirmed HIV-1 HIV-2 Dual) %><br>
+  </div>
+  <div class="form-inputs">
     <%= f.label :art_status, 'Getting ART?' %>
     <%= f.check_box :art_status %>&rarr;Yes.<br>
   </div>

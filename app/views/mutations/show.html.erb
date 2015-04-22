@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sequence Name:</strong>
+  <%= @patient.niid_id %>-<%= sprintf("%04d", @sample.id) %>-<%= sprintf("%02d", @sequence.read) %>_<%= @sequence.gene.downcase %>
+<br>
+  <strong>HXB2 Coordinates:</strong>
+  <%= @sequence.start %> - <%= @sequence.end %>
+</p>
+
+<p>
+  <strong>Substitutions compared to HXB2:</strong><br>
+  <div class="seqfigure">
+    <%= safe_join(@muts, ", ") %>
+  </div>
+</p>
+
+<%= link_to 'Edit', '#' %> |
+<%= link_to 'Back', sequence_path %> |
+<%= link_to 'Back to Index', sequences_path %> 

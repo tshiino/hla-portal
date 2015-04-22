@@ -6,9 +6,10 @@
   <thead>
     <tr>
       <th>NIID_ID</th>
-      <th>Lab_ID</t>
+      <th>Lab_ID</th>
       <th>S/N</th>
       <th>Date sample taken</th>
+      <th>Serostatus</th>
       <th>ART status</th>
       <th>ART formula</th>
       <th>CD4 (/&#13205;)</th>
@@ -32,6 +33,7 @@
           <% end %>
           <td><%= sample.id %></td>
           <td><%= sample.date_sample_taken %></td>
+          <td><%= sample.serostatus %></td>
           <td>
             <% if sample.art_status == false then %>
               na&#239;ve

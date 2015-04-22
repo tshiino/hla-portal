@@ -108,7 +108,7 @@ class PatientsController < ApplicationController
           next if r.header_row?
           record = Hash[[r.headers, r.fields].transpose]
           pid = Patient.find_by(:niid_id => record["niid_id"]).id
-          sample_table = record.slice("date_sample_taken", "art_status", "art_formula", "cd4_count", "date_cd4_exam", "viral_load", "condition", "remarks")
+          sample_table = record.slice("date_sample_taken", "art_status", "art_formula", "cd4_count", "date_cd4_exam", "viral_load", "condition", "remarks", "serostatus")
           sample_table.store("patient_id", pid)
           sample_table.store("operator_id", current_user.id)
           ns, is, es = Sample.import(sample_table)
@@ -129,7 +129,7 @@ class PatientsController < ApplicationController
                 else
                   homo = true if tally == serotype
                 end
-                /:(\d\d(?:\/\d\d)*)$/ =~ g
+                /\*\d\d:*(\d\d(?:\/\d\d)*)$/ =~ g
                 allele = $1
                 locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => serotype, "allele" => allele, "homo" => homo, "operator_id" => current_user.id }
                 nh, ih, eh = LocusA.import(locus_table)
@@ -151,7 +151,7 @@ class PatientsController < ApplicationController
                 else
                   homo = true if tally == serotype
                 end
-                /:(\d\d(?:\/\d\d)*)$/ =~ g
+                /\*\d\d:*(\d\d(?:\/\d\d)*)$/ =~ g
                 allele = $1
                 locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => serotype, "allele" => allele, "homo" => homo, "operator_id" => current_user.id }
                 nh, ih, eh = LocusB.import(locus_table)
@@ -173,7 +173,7 @@ class PatientsController < ApplicationController
                 else
                   homo = true if tally == serotype
                 end
-                /:(\d\d(?:\/\d\d)*)$/ =~ g
+                /\*\d\d:*(\d\d(?:\/\d\d)*)$/ =~ g
                 allele = $1
                 locus_table = { "date_exam" => hla_table["date_exam"], "patient_id" => pid, "serotype" => serotype, "allele" => allele, "homo" => homo, "operator_id" => current_user.id }
                 nh, ih, eh = LocusC.import(locus_table)
