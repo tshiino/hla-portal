@@ -1,19 +1,12 @@
 HlaPortal::Application.routes.draw do
 
   get 'sequences/new'
-
   get 'sequences/index'
-
   get 'sequences/edit'
-
   get 'sequences/update'
-
   get 'sequences/create'
-
   get 'sequences/destroy'
-
-  get 'sequences/upload'
-
+  get 'sequences/upload', to: 'sequences#upload'
   get 'sequences/import'
 
   get 'hlas/serotype_select1', to: 'hlas#serotype_select1'
@@ -26,13 +19,15 @@ HlaPortal::Application.routes.draw do
   get 'hlas/edita'
   get 'hlas/editb'
   get 'hlas/editc'
+
   get 'locus_as/show', to: 'patients#show'
   get 'locus_bs/show', to: 'patients#show'
   get 'locus_cs/show', to: 'patients#show'
+
   get 'samples/new'
+
   get 'patients/seeding', to: 'patients#seeding'
   get 'patients/gettemplate'
-  get 'sequences/upload', to: 'sequences#upload' 
 
   post 'patients/import', to: 'patients#import'
   post 'sequences/import', to: 'sequences#import'

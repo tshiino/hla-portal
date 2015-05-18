@@ -1,2 +1,11 @@
-<h1>Sequences#edit</h1>
-<p>Find me in app/views/sequences/edit.html.erb</p>
+<h1>Edit Sequence</h1>
+<h3>Patient: <%= @patient.niid_id %> (<%= @patient.lab_id %>), Sample No. <%= @sample.id %></h3>
+<div class="Operator">
+  Operator:
+  <%= current_user.name %>
+</div>
+
+<%= render 'form' %>
+<br>
+<%= link_to 'Show', @sequence %> |
+<%= link_to 'Back', sequences_path %>

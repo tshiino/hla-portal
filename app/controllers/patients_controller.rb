@@ -7,7 +7,7 @@ class PatientsController < ApplicationController
   # GET /patients.json
   def index
 #    @patients = Patient.all
-    @patients = Patient.order("niid_id")
+    @patients = Patient.order("niid_id").paginate(page: params[:page])
   end
 
   # GET /patients/1

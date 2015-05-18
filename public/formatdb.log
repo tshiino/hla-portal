@@ -16,3 +16,42 @@ Version 2.2.26 [Sep-21-2011]
 Started database file "HXB2-proteins.fas"
 Formatted 10 sequences in volume 0
 SUCCESS: formatted database HXB2ProtDB
+
+========================[ Apr 23, 2015  4:06 PM ]========================
+Version 2.2.26 [Sep-21-2011]
+Started database file "HXB2-DNAs.fas"
+Formatted 11 sequences in volume 0
+SUCCESS: formatted database HXB2nucDB
+
+========================[ Apr 28, 2015 11:47 AM ]========================
+Version 2.2.26 [Sep-21-2011]
+Started database file "HXB2-DNAs.fas"
+WARNING: [000.000] Sequence number 17 (lcl|RT), 3 illegal characters were removed:
+3 -s
+
+Formatted 26 sequences in volume 0
+SUCCESS: formatted database HXB2nucDB
+
+========================[ Apr 28, 2015 11:48 AM ]========================
+Version 2.2.26 [Sep-21-2011]
+Started database file "HXB2-DNAs.fas"
+WARNING: [000.000] Sequence number 17 (lcl|RT), 3 illegal characters were removed:
+3 -s
+
+Formatted 26 sequences in volume 0
+SUCCESS: formatted database HXB2nucDB
+
+========================[ Apr 28, 2015 11:56 AM ]========================
+Version 2.2.26 [Sep-21-2011]
+Started database file "HXB2-DNAs.fas"
+WARNING: [000.000] Sequence number 17 (lcl|RT), 3 illegal characters were removed:
+3 -s
+
+Formatted 27 sequences in volume 0
+SUCCESS: formatted database HXB2nucDB
+
+========================[ Apr 28, 2015 12:21 PM ]========================
+Version 2.2.26 [Sep-21-2011]
+Started database file "HXB2-DNAs.fas"
+Formatted 27 sequences in volume 0
+SUCCESS: formatted database HXB2nucDB

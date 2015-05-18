@@ -97,6 +97,121 @@ module Sheadna
     figlines.push([i, naseqstr, i + naseqstr.size - 1 ], [(i + 2)/3, subaa, 19 + (i + 2)/3])
     return figlines
   end
+
+  def detectins
+    targetseq = self
+    i = 0
+    inserts = Array.new  # list of insert position [[1st, last], ...]
+    while i <= targetseq.length
+      p = targetseq.index(/(-+)/, i)
+      break if p == nil
+      l = $1.length
+      foundins = [p+1, p+l]  # [1st, last] positions of inserts found.
+      inserts.push(foundins)
+      i = p + l
+    end
+    return inserts
+  end
+
+  def correctins(cs)
+    cs -= 1
+    targetseq = self
+    joinflag = false
+    inserts = targetseq.detectins
+    inserts.each do |sp, ep|
+      staddr = sp - 1
+      edaddr = ep - 1
+      if joinflag == true
+        joinflag = false
+        next
+      end
+      len = edaddr - staddr + 1
+      cop = (staddr - cs).modulo(3)  # position in codon 0 or 1 or 2
+      case len
+      when 1
+        if targetseq[edaddr + 2] == '-' && targetseq[edaddr + 3] == '-' && targetseq[edaddr + 4] != '-'
+          joinflag = true
+          case cop
+          when 0
+            targetseq[staddr + 3] = targetseq[staddr + 1]
+            targetseq[staddr + 1] = '-'
+          when 1
+            targetseq[staddr] = targetseq[staddr + 1]
+            targetseq[staddr + 1] = targetseq[staddr + 4]
+            targetseq[staddr + 4] = '-'
+          when 2
+            targetseq[staddr] = targetseq[staddr + 1]
+            targetseq[staddr + 1] = '-'
+          end
+        elsif targetseq[edaddr + 3] == '-' && targetseq[edaddr + 4] == '-' && targetseq[edaddr + 5] != '-'
+          joinflag = true
+          case cop
+          when 0
+            targetseq[staddr + 3] = targetseq[staddr + 1]
+            targetseq[staddr + 4] = targetseq[staddr + 2]
+            targetseq[staddr + 1] = '-'
+            targetseq[staddr + 2] = '-'
+          when 1
+            targetseq[staddr] = targetseq[staddr + 1]
+            targetseq[staddr + 1] = targetseq[staddr + 2]
+            targetseq[staddr + 2] = '-'
+          when 2
+            targetseq[staddr] = targetseq[staddr + 1]
+            targetseq[staddr + 4] = targetseq[staddr + 2]
+            targetseq[staddr + 1] = '-'
+            targetseq[edaddr + 2] = '-'
+          end
+        end
+      when 2
+        if targetseq[edaddr + 2] == '-' && targetseq[edaddr + 3] != '-'
+          joinflag = true
+          case cop
+          when 0
+            targetseq[staddr + 3] = targetseq[staddr + 2]
+            targetseq[staddr + 2] = '-'
+          when 1
+            targetseq[staddr + 3] = targetseq[staddr + 2]
+            targetseq[staddr + 2] = targetseq[staddr - 1]
+            targetseq[staddr - 1] = '-'
+          when 2
+            targetseq[staddr] = targetseq[staddr + 2]
+            targetseq[staddr + 2] = '-'
+          end
+        elsif targetseq[edaddr + 3] == '-' && targetseq[edaddr + 4] != '-'
+          joinflag = true
+          case cop
+          when 0
+            targetseq[staddr + 4] = targetseq[staddr + 3]
+            targetseq[staddr + 3] = targetseq[staddr + 2]
+            targetseq[staddr + 2] = '-'
+          when 1
+            targetseq[staddr] = targetseq[staddr + 2]
+            targetseq[staddr + 1] = targetseq[staddr + 3]
+            targetseq[staddr + 2] = '-'
+            targetseq[staddr + 3] = '-'
+          when 2
+            targetseq[staddr] = targetseq[staddr + 2]
+            targetseq[staddr + 4] = targetseq[staddr + 3]
+            targetseq[staddr + 2] = '-'
+            targetseq[staddr + 3] = '-'
+          end
+        end
+      when 3
+        case cop
+        when 1
+          targetseq[edaddr] = targetseq[staddr - 1]
+          targetseq[staddr - 1] = '-'
+        when 2
+          targetseq[staddr] = targetseq[edaddr + 1]
+          targetseq[edaddr + 1] = '-'
+        else
+          next
+        end
+      else
+      end
+    end
+    return targetseq
+  end
 end
 
 module Sheadaa

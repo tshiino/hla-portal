@@ -1,5 +1,8 @@
 <% provide(:title, 'Listing Sequences\' Information') %>
 <h2><%= yield(:title) %></h2>
+
+<%= will_paginate %>
+
 <table>
   <thead>
     <tr>
@@ -29,7 +32,7 @@
           <td><%= sample.id %></td>
           <% sequences_for_sample = @sequences.where( sample_id: sample.id ) %>
           <% if sequences_for_sample.exists? then %>
-            <td></td><td></td><td></td><td></td><td>Add new sequence</td>
+            <td colspan="7"><%= link_to 'Add new sequence', :controller => 'sequences', :action => 'new', id: sample %></td>
             <% sequences_for_sample.each do |sequence| %>
               <% if sequence.read > 0 then %>
                 <tr><td></td><td>&emsp;&emsp;&#8627;</td>
@@ -50,17 +53,20 @@
               <td><%= sequence.subtype_code %></td>
               <td><%= sequence.accession %></td>
               <td><%= link_to 'Show', sequence %></td>
-              <td><%= link_to 'Edit', edit_sample_path(sample) %></td>
+              <td><%= link_to 'Edit', edit_sequence_path(sequence) %></td>
               <td><%= link_to 'Destroy', sequence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             <% end %>
           <% else %>
-            <td colspan="7">Submit a sequence</td>
+            <td colspan="7"><%= link_to 'Submit a sequence', :controller => 'sequences', :action => 'new', id: sample %></td>
           <% end %>
         <% end %>
       <% end %>
     <% end %>
   <tr></tr>
 </table>
+
+<%= will_paginate %>
+
 <div class="actions">
   <p>
   <%= link_to 'Upload FASTA alignment of sequences', sequences_upload_path %>

@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Patients</h1>
+
+<%= will_paginate %>
+
 <table>
   <thead>
     <tr>
@@ -52,7 +55,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate %>
 <br>
 <div class="actions">
   <%= link_to 'Make a New Patient', new_patient_path %>

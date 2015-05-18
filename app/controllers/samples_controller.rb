@@ -6,8 +6,10 @@ class SamplesController < ApplicationController
   # GET /samples
   # GET /samples.json
   def index
-    @samples = Sample.all
-    @patients = Patient.order("niid_id")
+#    @samples = Sample.all
+    @samples = Sample.paginate(page: params[:page])
+#    @patients = Patient.order("niid_id")
+    @patients = Patient.order("niid_id").paginate(page: params[:page])
   end
 
   # GET /samples/1

@@ -45,10 +45,14 @@ class HlasController < ApplicationController
   end
 
   def index
-    @patients = Patient.order("niid_id")
-    @locus_as = LocusA.all
-    @locus_bs = LocusB.all
-    @locus_cs = LocusC.all
+    @patients = Patient.order("niid_id").paginate(page: params[:page])
+#    @locus_as = LocusA.all
+#    @locus_bs = LocusB.all
+#    @locus_cs = LocusC.all
+    @hlas = Hla.paginate(page: params[:page])
+    @locus_as = LocusA.paginate(page: params[:page])
+    @locus_bs = LocusB.paginate(page: params[:page])
+    @locus_cs = LocusC.paginate(page: params[:page])
   end
 
   def edit

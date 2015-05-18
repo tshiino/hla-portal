@@ -8,33 +8,155 @@ class SequencesController < ApplicationController
   end
   before_action :signed_in_user, only:[:index, :show, :new, :edit, :update, :create, :destroy, :upload, :import]
   before_action :set_sequence, only: [:show, :edit, :update, :destroy]
-  before_action :set_sample, only: [:show]
-  before_action :set_patient, only: [:show]
+  before_action :set_sample, only: [:show, :edit, :update]
+  before_action :set_patient, only: [:show, :edit]
 
   def new
+    @sample = Sample.find(params[:id])
+    @patient = @sample.patient
+    @sequence = Sequence.new
   end
 
   def index
-    @sequences = Sequence.all
-    @samples = Sample.all
-    @patients = Patient.order("niid_id")
+#    @sequences = Sequence.all
+#    @samples = Sample.all
+#    @patients = Patient.order("niid_id")
+    @sequences = Sequence.paginate(page: params[:page])
+    @samples = Sample.paginate(page: params[:page])
+    @patients = Patient.order("niid_id").paginate(page: params[:page])
   end
 
   def edit
   end
 
   def update
+    respond_to do |format|
+      if @sequence.update(sequence_params)
+        @sequence.operator_id = current_user.id
+        @sequence.save
+        format.html { redirect_to @sequence, notice: 'Sample was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @sequence.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def create
+    @sequence = Sequence.new(sequence_params)
+    @sequence.operator_id = current_user.id
+
+    querysequence = @sequence.sequence.gsub(/-+/, '')
+    querysequence.gsub!(/\s/, '')
+    factory = Bio::Blast.local('blastn', '/var/www/Rails/hla-portal/public/HXB2nucDB', '', '/usr/local/bin/blastall' )
+    report = factory.query(querysequence)
+    highhit = Hash.new     # Hit-target with { target_id => report_instance }
+    report.each do |hit|
+      if hit.bit_score > 0.8 * querysequence.length
+        highhit[hit.target_id] = hit
+      end
+    end
+    besthit = [nil, 10000] # Shortest hit-target with [target_id, length]
+    coordinates = [ 1, 10000 ] # HXB2 coordinates
+    highhit.each do |tg, hit|
+      lt = hit.target_len
+      besthit = [ hit.target_id, lt ] if lt < besthit[1]
+      coordinates = [hit.lap_at[2], hit.lap_at[3]] if hit.target_id == "Full"
+    end
+
+    if @sequence.gene == ''
+        redirect_to(sequences_path, alert: "Since gene field is not selected, your sequence cannot be saved!!")
+        return
+    elsif highhit[besthit[0]].target_id != @sequence.gene
+        # redirect_to(sequences_path, alert: "Since a selected gene (#{@sequence.gene}) is not match the result of BLAST search, your sequence cannot be saved!!")
+        # return
+        flash[:notice] = "Selected gene (#{@sequence.gene}) is not match a BLAST result (#{highhit[besthit[0]].target_id}). The BLAST result is adopted."
+        @sequence.gene = highhit[besthit[0]].target_id
+    end
+
+    hxbaligned = Bio::Sequence::NA.new(highhit[besthit[0]].target_seq)
+    inslist = hxbaligned.detectins
+    insline = String.new
+    inslist.each do |i|
+      insline << i[0].to_s
+      insline << "-"
+      insline << i[1].to_s
+      insline << ","
+    end
+    insline.chop!
+
+    alignedquery = Bio::Sequence::NA.new(highhit[besthit[0]].query_seq)
+    correctedquery = alignedquery.correctins(@sequence.codon_start)
+    correctedquery.upcase!
+#    @sequence.sequence = highhit[besthit[0]].query_seq
+    @sequence.sequence = correctedquery
+    @sequence.start = coordinates[0]
+    @sequence.end = coordinates[1]
+    @sequence.length = highhit[besthit[0]].query_seq.size
+    @sequence.insertion = insline
+    @sequence.read = Sequence.where(sample_id: @sequence.sample_id).count + 1
+    if @sequence.clonal == '1'
+      @sequence.clonal = true
+    else
+      @sequence.clonal = false
+    end
+    if @sequence.provirus == '1'
+      @sequence.provirus = true
+    else
+      @sequence.provirus = false
+    end
+
+    naseq = Bio::Sequence::NA.new(@sequence.sequence)
+    aa = naseq.exactranslate(@sequence.codon_start)
+    @sequence.translation = aa
+
+    aaseq = Bio::Sequence::AA.new(aa)
+    hxb = ProteinRef.where("name = ? and gene = ?", 'HXB2-LAI-IIIB-BRU', @sequence.gene ).first
+    dif = ((@sequence.start + @sequence.codon_start - 1) - hxb.start ) / 3
+    if dif > 0  # Add '-' to aaseq.
+      aaseq.insert(0, "-" * dif)
+    elsif dif < 0  # Truncate -dif residues from aaseq.
+      aaseq.slice!(0, dif * -1)
+    end
+    aainsrange = Array.new
+    inslist.each do |i|
+      aainsrange << Range.new((i[0] + 2)/3 -1 + dif, (i[1] + 2)/3 -1 +dif)
+    end
+    aa = String.new(aaseq.to_s)
+    @muts = aaseq.substitutions(hxb.sequence, aainsrange)
+    aainsrange.each do |air|
+      @muts << "+#{air.first}#{aa[air]}"
+    end
+
     respond_to do |format|
       if @sequence.save
         format.html { redirect_to @sequence, notice: 'Sequence was successfully created.' }
         format.json { render action: 'show', status: :created, location: @sequence }
       else
-        format.html { render action: 'new' }
+        format.html { render :action => 'new', :id => @sequence.sample_id }
         format.json { render json: @sequence.errors, status: :unprocessable_entity }
+        # format.html { redirect_to(sequences_path, alert: "Your sequence cannot be saved!!") }
+        return
       end
+    end
+
+    @muts.each do |m|
+      @mutation = Mutation.new
+      @mutation.sequence_id = Sequence.last.id
+      @mutation.gene = @sequence.gene
+      if /^([A-Z]+)(\d+)(\D)/ =~ m then
+        @mutation.wildtype = $1
+        @mutation.locus = $2
+        @mutation.mutated = $3
+      elsif /^\+(\d+)(\D+),?$/ =~ m then
+        @mutation.wildtype = 'In'
+        @mutation.locus = $1
+        @mutation.mutated = $2
+      else
+        next
+      end
+      @mutation.save
     end
 
   end

@@ -1,0 +1,67 @@
+<%= form_for(@sequence) do |f| %>
+  <% if @sequence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sequence.errors.count, "error") %> prohibited this sample from being saved:</h2>
+
+      <ul>
+      <% @sequence.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <% @sequence.sample_id = @sample.id %>
+    <%= f.hidden_field :sample_id %>
+  </div>
+  <div class="form-inputs">
+    <%= label :date_seq, 'Date Sequenced' %>
+    <%= f.date_select :date_seq, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :inculde_blank => true, :class => 'date' %><br> 
+  </div>
+  <div class="form-inputs">
+    <%= f.label :gene, 'Gene/Region' %>
+    <%= f.collection_select :gene, GeneMaster.all, :name, :name, :prompt => "Select gene." %> <font color="red">&emsp;Recommended.<br></font>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :accession, 'Accession #' %>
+    <%= f.text_field :accession %> <font color="red">&emsp;Optional.</font><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :start, 'Range start from:' %>
+    <%= f.text_field :start %>
+    <%= f.label :end, ' end to:' %>
+    <%= f.text_field :end %> <font color="red">&emsp;Estimated automatically.</font><br>
+  </div>
+  <div class="form-inputs">
+  <%= f.label :sequence, 'Nucleotide sequence' %>
+  <%= f.text_area :sequence, :size => "60x15", :class => "sequence" %>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :codon_start, 'Codon start at:' %>
+    <%= f.select :codon_start, %i(1 2 3) %><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :insertion, 'Insertions against HXB2:' %>
+    <%= f.text_field :insertion %> <font color="red">&emsp;Identified automatically.</font><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :subtype_code, 'Subtype:' %>
+    <%= f.collection_select :subtype_code, SubtypeMaster.all, :code, :code, :prompt => "Unknown" %> <font color="red">&emsp;Optional.</font><br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :clonal, 'Are these clonal sequences?' %>
+    <%= f.check_box :clonal %>&emsp;
+    <%= f.label :provirus, 'Are these proviral sequences?' %>
+    <%= f.check_box :provirus %>&rarr;Yes.<br>
+  </div>
+  <div class="form-inputs">
+    <%= f.label :notes, "Notes" %>
+    <%= f.text_field :notes %><br>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit %>
+  </div>
+
+<% end %>

@@ -2,6 +2,8 @@
 
 <h1>Listing Samples' Information</h1>
 
+<%= will_paginate %>
+
 <table>
   <thead>
     <tr>
@@ -25,7 +27,7 @@
       <tr>
         <td><%= patient.niid_id %></td>
         <td><%= patient.lab_id %></td>
-      <% samples_for_patient = @samples.where( patient_id: patient.id ) %>
+      <% samples_for_patient = Sample.where( patient_id: patient.id ) %>
       <% if samples_for_patient.exists? then %>
         <% samples_for_patient.each_with_index do |sample, i| %>
           <% if i >= 1 then %>
@@ -77,5 +79,6 @@
   </tbody>
 </table>
 
+<%= will_paginate %>
 <br>
 
