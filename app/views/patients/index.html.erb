@@ -1,25 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Patients</h1>
-
 <%= will_paginate %>
 
 <table>
   <thead>
     <tr>
-      <th>Niid</th>
-      <th>Lab</th>
-      <th>Affiliation</th>
-      <th>Hosp</th>
-      <th>Gender</th>
-      <th>Nationality</th>
+      <th><%= sort_link(@search, :niid_id, "Niid") %></th>
+      <th><%= sort_link(@search, :lab_id,  "Lab") %></th>
+      <th><%= sort_link(@search, :affiliation, "Affiliation") %></th>
+      <th><%= sort_link(@search, :hosp_id, "Hosp") %></th>
+      <th><%= sort_link(@search, :gender, "Gender") %></th>
+      <th><%= sort_link(@search, :nationarity, "Nationality") %></th>
 <!--      <th>Date of birth</th>-->
-      <th>Date diagnosed</th>
-      <th>Educational</th>
-      <th>Occupation</th>
-      <th>Marital status</th>
-      <th>Risk</th>
-      <th>ART</th>
+      <th><%= sort_link(@search, :date_diagnosed, "Date diagnosed") %></th>
+      <th><%= sort_link(@search, :edu_background, "Educational") %></th>
+      <th><%= sort_link(@search, :occupation, "Occupation") %></th>
+      <th><%= sort_link(@search, :marital_status, "Marital status") %></th>
+      <th><%= sort_link(@search, :risk, "Risk") %></th>
+      <th><%= sort_link(@search, :date_of_art_init, "ART") %></th>
 <!--      <th>Operator</th>-->
       <th colspan="3">Operate</th>
     </tr>
@@ -56,7 +55,59 @@
   </tbody>
 </table>
 <%= will_paginate %>
-<br>
+
+<div class="well">
+  <H3>Search and Refine the List</h3>
+  <form class="form-horizontal">
+    <%= search_form_for @search do |f| %>
+      <div class="form-group">
+      <%= f.label :niid_id_cont, 'NIID ID =', :class => "control-label col-xs-2" %>
+      <%= f.text_field :niid_id_cont, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
+      <%= f.label :affiliation_eq, 'Affiliation =', :class => "control-label col-xs-2" %>
+      <%= f.select :affiliation_eq, {"Vietnam" => "Vietnam", "Ghana" => "Ghana", "India" => "India", "Japan" => "Japan"}, :include_blank => 'All', :class => "form-control" %>
+
+      <%= f.label :gender_eq, 'Gender =', :class => "control-label col-xs-2" %>
+      <%= f.select :gender_eq, {"Male" => "Male", "Female" => "Female", "Other" => "Other", "Unknown" => "Unknown"}, :include_blank => 'All', :class => "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
+      <%= f.label :date_diagnosed_gt, 'Diagnosed from', :class => "control-label col-xs-2" %>
+      <div class="col-xs-3">
+        <%= f.date_select :date_diagnosed_gt, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date', :class => "form-control" %>
+      </div>
+      <br>
+      <%= f.label :date_diagnosed_lt, 'to', :class => "control-label col-xs-2" %>
+      <div class="col-xs-3">
+        <%= f.date_select :date_diagnosed_lt, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date', :class => "form-control" %>
+      </div>
+      </div>
+      <br>
+      <div class="form-group">
+      <%= f.label :edu_background_eq, 'Education=', :class => "control-label col-xs-2" %>
+      <%= f.select :edu_background_eq, Patient.edu_background.options, :include_blank => 'All', :class => "form-control" %>
+
+      <%= f.label :marital_status_eq, 'MaritalStatus=', :class => "control-label col-xs-2" %>
+      <%= f.select :marital_status_eq, Patient.marital_status.options, :include_blank => 'All', :class => "form-control" %>
+
+      <%= f.label :risk_eq, 'Risk=', :class => "control-label col-xs-2" %>
+      <%= f.select :risk_eq, Patient.risk.options, :include_blank => 'All', :class => "form-control" %>
+      </div>
+      <div class="form-group">
+      <%= f.label :date_of_art_init_null, "naive?", :class => "control-label col-xs-2", :class => "form-control" %>
+      <%= f.check_box :date_of_art_init_null, :checked => true, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="actions">
+        <%= f.submit 'Search!', :class => "btn btn-primary btn-sm" %>
+        <input type="reset" value="Clear" class="btn btn-default btn-sm">
+      </div>
+    <% end %>
+  </form>
+</div>
+<hr>
 <div class="actions">
   <%= link_to 'Make a New Patient', new_patient_path %>
   &emsp;|&emsp;

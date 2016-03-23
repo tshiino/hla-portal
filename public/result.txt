@@ -1,159 +1,779 @@
-BLASTP 2.2.26 [Sep-21-2011]
+# fasta34 testPRRTnuc.fas HXB2-DNAs.fas
+FASTA searches a protein or DNA sequence data bank version 34.26.5 April 26, 2007
+Please cite:
+ W.R. Pearson & D.J. Lipman PNAS (1988) 85:2444-2448
+
+ query, 1137 nt
+ vs HXB2-DNAs.fas library
+
+       opt      E()
+< 20     0     0:
+  22     0     0:           one = represents 1 library sequences
+  24     0     0:
+  26     0     0:
+  28     0     0:
+  30     0     0:
+  32     0     0:
+  34     0     0:
+  36     0     1:*
+  38     2     1:*=
+  40     2     1:*=
+  42     3     2:=*=
+  44     1     2:=*
+  46     1     2:=*
+  48     3     2:=*=
+  50     3     2:=*=
+  52     3     2:=*=
+  54     0     1:*
+  56     0     1:*
+  58     0     1:*
+  60     0     1:*
+  62     1     1:*
+  64     0     0:
+  66     0     0:
+  68     0     0:
+  70     0     0:
+  72     0     0:
+  74     0     0:
+  76     0     0:
+  78     0     0:
+  80     0     0:
+  82     0     0:
+  84     0     0:
+  86     0     0:
+  88     0     0:
+  90     2     0:==
+  92     0     0:
+  94     0     0:
+  96     0     0:
+  98     0     0:
+ 100     0     0:
+ 102     0     0:
+ 104     0     0:
+ 106     0     0:
+ 108     0     0:
+ 110     0     0:
+ 112     0     0:
+ 114     0     0:
+ 116     0     0:
+ 118     0     0:
+>120     6     0:======
+  37912 residues in    27 sequences
+  Expectation_n fit: rho(ln(x))= 0.0000+/- 0.028; mu= 66.3605+/- 2.150
+ mean_var=494.0480+/-255.968, 0's: 0 Z-trim: 8  B-trim: 0 in 0/3
+ Lambda= 0.057702
+ Kolmogorov-Smirnov  statistic: 0.1359 (N=9) at  52
+
+FASTA (3.5 Sept 2006) function [optimized, +5/-4 matrix (5:-4)] ktup: 6
+ join: 59, opt: 44, open/ext: -12/-4, width:  16
+The best scores are:                                      opt bits E(27)
+Full                                           (9719) [f] 5172 449.3 2.5e-128
+Gag-Pol                                        (4307) [f] 5172 448.1 5.6e-128
+Pol                                            (3012) [f] 5172 447.6  8e-128
+Pol-PRRT                                       (1617) [f] 5172 446.7 1.5e-127
+RT                                             (1320) [f] 3903 340.7 1.2e-95
+PR                                             ( 297) [f] 1269 119.3 5.2e-29
+Gag                                            (1503) [f]  155 28.9   0.085
+Full                                           (9719) [r]   84 25.7    0.72
+p6                                             ( 159) [f]  155 25.7     0.8
+Gag-Pol                                        (4307) [r]   84 24.5     1.6
 
 
-Reference: Altschul, Stephen F., Thomas L. Madden, Alejandro A. Schaffer, 
-Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), 
-"Gapped BLAST and PSI-BLAST: a new generation of protein database search
-programs",  Nucleic Acids Res. 25:3389-3402.
+>>Full                                                    (9719 nt)
+ initn: 5127 init1: 5127 opt: 5172  Z-score: 2347.0  bits: 449.3 E(): 2.5e-128
+banded Smith-Waterman score: 5172;  94.987% identity (94.987% similar) in 1137 nt overlap (1-1137:2253-3389)
 
-Reference for compositional score matrix adjustment: Altschul, Stephen F., 
-John C. Wootton, E. Michael Gertz, Richa Agarwala, Aleksandr Morgulis,
-Alejandro A. Schaffer, and Yi-Kuo Yu (2005) "Protein database searches
-using compositionally adjusted substitution matrices", FEBS J. 272:5101-5109.
+                                             10        20        30
+query                                CCTCAAATCACTCTTTGGCAGCGACCCCTC
+                                     :::::  ::::::::::::: :::::::::
+Full   GATAGACAAGGAACTGTATCCTTTAACTTCCCTCAGGTCACTCTTTGGCAACGACCCCTC
+           2230      2240      2250      2260      2270      2280  
 
-Query= V12a001-0027-02
-         (495 letters)
+               40        50        60        70        80        90
+query  GTTGCAATAAAGATAGGGGGGCAGCTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+       ::  ::::::::::::::::::: ::::::::::::::::::::::::::::::::::::
+Full   GTCACAATAAAGATAGGGGGGCAACTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+           2290      2300      2310      2320      2330      2340  
 
-Database: HXB2ProtDB 
-           10 sequences; 4481 total letters
+              100       110       120       130       140       150
+query  ACAGTATTAGAAGAAATGAATTTAACAGGGAAATGGAAACCAAAAATGATAGGGGGAATT
+       ::::::::::::::::::: :::  :::: : ::::::::::::::::::::::::::::
+Full   ACAGTATTAGAAGAAATGAGTTTGCCAGGAAGATGGAAACCAAAAATGATAGGGGGAATT
+           2350      2360      2370      2380      2390      2400  
 
-Searching..................................................done
+              160       170       180       190       200       210
+query  GGAGGTTTTATCAAAGTGAAACAGTATGATCAGGTAGCTATAGAAATCTGTGGACATAAA
+       ::::::::::::::::: : ::::::::::::: ::   :::::::::::::::::::::
+Full   GGAGGTTTTATCAAAGTAAGACAGTATGATCAGATACTCATAGAAATCTGTGGACATAAA
+           2410      2420      2430      2440      2450      2460  
+
+              220       230       240       250       260       270
+query  GTTACAGGTACAGTATTAGTAGGACCCACACCTGTCAATATAATTGGAAGGAATCTGTTG
+       : :: ::::::::::::::::::::: ::::::::::: ::::::::::: :::::::::
+Full   GCTATAGGTACAGTATTAGTAGGACCTACACCTGTCAACATAATTGGAAGAAATCTGTTG
+           2470      2480      2490      2500      2510      2520  
+
+              280       290       300       310       320       330
+query  ACTCAGCTTGGCTGCACTTTAAATTTTCCCATTAGTCCTATTGAAACTGTACCAGTAAAA
+       :::::: :::: ::::::::::::::::::::::: :::::::: :::::::::::::::
+Full   ACTCAGATTGGTTGCACTTTAAATTTTCCCATTAGCCCTATTGAGACTGTACCAGTAAAA
+           2530      2540      2550      2560      2570      2580  
+
+              340       350       360       370       380       390
+query  TTAAAGCCAGGAATGGATGGCCCAAAAGTAAAACAATGGCCATTGACAGAAGAAAAAATA
+       ::::::::::::::::::::::::::::: ::::::::::::::::::::::::::::::
+Full   TTAAAGCCAGGAATGGATGGCCCAAAAGTTAAACAATGGCCATTGACAGAAGAAAAAATA
+           2590      2600      2610      2620      2630      2640  
+
+              400       410       420       430       440       450
+query  AAAGCATTAATAGAAATTTGCACAGAAATGGAAAAGGAAGGGAAAATTTCAAAAATTGGG
+       ::::::::: :::::::::: ::::: :::::::::::::::::::::::::::::::::
+Full   AAAGCATTAGTAGAAATTTGTACAGAGATGGAAAAGGAAGGGAAAATTTCAAAAATTGGG
+           2650      2660      2670      2680      2690      2700  
+
+              460       470       480       490       500       510
+query  CCTGAAAATCCATACAATACTCCAGTGTTTGCAATAAAGAAGAAAGACAGTACTAAATGG
+       :::::::::::::::::::::::::: ::::: :::::::: ::::::::::::::::::
+Full   CCTGAAAATCCATACAATACTCCAGTATTTGCCATAAAGAAAAAAGACAGTACTAAATGG
+           2710      2720      2730      2740      2750      2760  
+
+              520       530       540       550       560       570
+query  AGAAAATTAGTAGATTTCAGAGAACTTAATAAAAGGACTCAAGACTTCTGGGAAGTTCAA
+       :::::::::::::::::::::::::::::::: :: ::::::::::::::::::::::::
+Full   AGAAAATTAGTAGATTTCAGAGAACTTAATAAGAGAACTCAAGACTTCTGGGAAGTTCAA
+           2770      2780      2790      2800      2810      2820  
+
+              580       590       600       610       620       630
+query  TTAGGAATACCACATCCTGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGATGTG
+       ::::::::::::::::: ::::::::::::::::::::::::::::::::::::::::::
+Full   TTAGGAATACCACATCCCGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGATGTG
+           2830      2840      2850      2860      2870      2880  
+
+              640       650       660       670       680       690
+query  GGTGATGCATATTTTTCAGTTCCCTTAGATAAAGAATTTAGAAAATATACTGCATTTACC
+       :::::::::::::::::::::::::::::: :::: :: :: :: :::::::::::::::
+Full   GGTGATGCATATTTTTCAGTTCCCTTAGATGAAGACTTCAGGAAGTATACTGCATTTACC
+           2890      2900      2910      2920      2930      2940  
+
+              700       710       720       730       740       750
+query  ATACCTAGTCTAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCACAG
+       ::::::::: ::::::::::::::::::::::::::::::::::::::::::::::::::
+Full   ATACCTAGTATAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCACAG
+           2950      2960      2970      2980      2990      3000  
+
+              760       770       780       790       800       810
+query  GGATGGAAAGGATCACCAGCAATATTTCAATGTAGCATGACAAAAATCTTAGAGCCTTTT
+       :::::::::::::::::::::::::: ::: :::::::::::::::::::::::::::::
+Full   GGATGGAAAGGATCACCAGCAATATTCCAAAGTAGCATGACAAAAATCTTAGAGCCTTTT
+           3010      3020      3030      3040      3050      3060  
+
+              820       830       840       850       860       870
+query  AGAAAACAAAATCCAGACATAGTTATATATCAATACATGGATGATTTGTATGTAGGATCT
+       :::::::::::::::::::::::::: :::::::::::::::::::::::::::::::::
+Full   AGAAAACAAAATCCAGACATAGTTATCTATCAATACATGGATGATTTGTATGTAGGATCT
+           3070      3080      3090      3100      3110      3120  
+
+              880       890       900       910       920       930
+query  GACTTAGAAATAGAGCAGCATAGAACAAAAATAGAGGAACTGAGACAACATCTGTTGAGG
+       ::::::::::::: :::::::::::::::::::::::: :::::::::::::::::::::
+Full   GACTTAGAAATAGGGCAGCATAGAACAAAAATAGAGGAGCTGAGACAACATCTGTTGAGG
+           3130      3140      3150      3160      3170      3180  
+
+              940       950       960       970       980       990
+query  TGGGGATTTACCACACCAGACAAAAAACATCAGAAAGAGCCTCCATTCCTTTGGATGGGT
+       :::::: ::::::::::::::::::::::::::::::: :::::::::::::::::::::
+Full   TGGGGACTTACCACACCAGACAAAAAACATCAGAAAGAACCTCCATTCCTTTGGATGGGT
+           3190      3200      3210      3220      3230      3240  
+
+             1000      1010      1020      1030      1040      1050
+query  TATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAATGCTGCCAGAAAAAGACAGC
+       ::::::::::::::::::::::::::::::::::::::: ::::::::::::::::::::
+Full   TATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAGTGCTGCCAGAAAAAGACAGC
+           3250      3260      3270      3280      3290      3300  
+
+             1060      1070      1080      1090      1100      1110
+query  TGGACTGTCAATGACATACAGAAGTTAGTAGGAAAATTAAATTGGGCAAGTCAGATTTAT
+       ::::::::::::::::::::::::::::: :: ::::: :::::::::::::::::::: 
+Full   TGGACTGTCAATGACATACAGAAGTTAGTGGGGAAATTGAATTGGGCAAGTCAGATTTAC
+           3310      3320      3330      3340      3350      3360  
+
+             1120      1130                                        
+query  CCAGGGATTAAAGTAAAACAATTGTGT                                 
+       ::::::::::::::::  ::::: :::                                 
+Full   CCAGGGATTAAAGTAAGGCAATTATGTAAACTCCTTAGAGGAACCAAAGCACTAACAGAA
+           3370      3380      3390      3400      3410      3420  
+
+>>Gag-Pol                                                 (4307 nt)
+ initn: 5127 init1: 5127 opt: 5172  Z-score: 2347.0  bits: 448.1 E(): 5.6e-128
+banded Smith-Waterman score: 5172;  94.987% identity (94.987% similar) in 1137 nt overlap (1-1137:1464-2600)
+
+                                             10        20        30
+query                                CCTCAAATCACTCTTTGGCAGCGACCCCTC
+                                     :::::  ::::::::::::: :::::::::
+Gag-Po GATAGACAAGGAACTGTATCCTTTAACTTCCCTCAGGTCACTCTTTGGCAACGACCCCTC
+          1440      1450      1460      1470      1480      1490   
+
+               40        50        60        70        80        90
+query  GTTGCAATAAAGATAGGGGGGCAGCTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+       ::  ::::::::::::::::::: ::::::::::::::::::::::::::::::::::::
+Gag-Po GTCACAATAAAGATAGGGGGGCAACTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+          1500      1510      1520      1530      1540      1550   
+
+              100       110       120       130       140       150
+query  ACAGTATTAGAAGAAATGAATTTAACAGGGAAATGGAAACCAAAAATGATAGGGGGAATT
+       ::::::::::::::::::: :::  :::: : ::::::::::::::::::::::::::::
+Gag-Po ACAGTATTAGAAGAAATGAGTTTGCCAGGAAGATGGAAACCAAAAATGATAGGGGGAATT
+          1560      1570      1580      1590      1600      1610   
+
+              160       170       180       190       200       210
+query  GGAGGTTTTATCAAAGTGAAACAGTATGATCAGGTAGCTATAGAAATCTGTGGACATAAA
+       ::::::::::::::::: : ::::::::::::: ::   :::::::::::::::::::::
+Gag-Po GGAGGTTTTATCAAAGTAAGACAGTATGATCAGATACTCATAGAAATCTGTGGACATAAA
+          1620      1630      1640      1650      1660      1670   
+
+              220       230       240       250       260       270
+query  GTTACAGGTACAGTATTAGTAGGACCCACACCTGTCAATATAATTGGAAGGAATCTGTTG
+       : :: ::::::::::::::::::::: ::::::::::: ::::::::::: :::::::::
+Gag-Po GCTATAGGTACAGTATTAGTAGGACCTACACCTGTCAACATAATTGGAAGAAATCTGTTG
+          1680      1690      1700      1710      1720      1730   
+
+              280       290       300       310       320       330
+query  ACTCAGCTTGGCTGCACTTTAAATTTTCCCATTAGTCCTATTGAAACTGTACCAGTAAAA
+       :::::: :::: ::::::::::::::::::::::: :::::::: :::::::::::::::
+Gag-Po ACTCAGATTGGTTGCACTTTAAATTTTCCCATTAGCCCTATTGAGACTGTACCAGTAAAA
+          1740      1750      1760      1770      1780      1790   
+
+              340       350       360       370       380       390
+query  TTAAAGCCAGGAATGGATGGCCCAAAAGTAAAACAATGGCCATTGACAGAAGAAAAAATA
+       ::::::::::::::::::::::::::::: ::::::::::::::::::::::::::::::
+Gag-Po TTAAAGCCAGGAATGGATGGCCCAAAAGTTAAACAATGGCCATTGACAGAAGAAAAAATA
+          1800      1810      1820      1830      1840      1850   
+
+              400       410       420       430       440       450
+query  AAAGCATTAATAGAAATTTGCACAGAAATGGAAAAGGAAGGGAAAATTTCAAAAATTGGG
+       ::::::::: :::::::::: ::::: :::::::::::::::::::::::::::::::::
+Gag-Po AAAGCATTAGTAGAAATTTGTACAGAGATGGAAAAGGAAGGGAAAATTTCAAAAATTGGG
+          1860      1870      1880      1890      1900      1910   
+
+              460       470       480       490       500       510
+query  CCTGAAAATCCATACAATACTCCAGTGTTTGCAATAAAGAAGAAAGACAGTACTAAATGG
+       :::::::::::::::::::::::::: ::::: :::::::: ::::::::::::::::::
+Gag-Po CCTGAAAATCCATACAATACTCCAGTATTTGCCATAAAGAAAAAAGACAGTACTAAATGG
+          1920      1930      1940      1950      1960      1970   
+
+              520       530       540       550       560       570
+query  AGAAAATTAGTAGATTTCAGAGAACTTAATAAAAGGACTCAAGACTTCTGGGAAGTTCAA
+       :::::::::::::::::::::::::::::::: :: ::::::::::::::::::::::::
+Gag-Po AGAAAATTAGTAGATTTCAGAGAACTTAATAAGAGAACTCAAGACTTCTGGGAAGTTCAA
+          1980      1990      2000      2010      2020      2030   
+
+              580       590       600       610       620       630
+query  TTAGGAATACCACATCCTGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGATGTG
+       ::::::::::::::::: ::::::::::::::::::::::::::::::::::::::::::
+Gag-Po TTAGGAATACCACATCCCGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGATGTG
+          2040      2050      2060      2070      2080      2090   
+
+              640       650       660       670       680       690
+query  GGTGATGCATATTTTTCAGTTCCCTTAGATAAAGAATTTAGAAAATATACTGCATTTACC
+       :::::::::::::::::::::::::::::: :::: :: :: :: :::::::::::::::
+Gag-Po GGTGATGCATATTTTTCAGTTCCCTTAGATGAAGACTTCAGGAAGTATACTGCATTTACC
+          2100      2110      2120      2130      2140      2150   
+
+              700       710       720       730       740       750
+query  ATACCTAGTCTAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCACAG
+       ::::::::: ::::::::::::::::::::::::::::::::::::::::::::::::::
+Gag-Po ATACCTAGTATAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCACAG
+          2160      2170      2180      2190      2200      2210   
+
+              760       770       780       790       800       810
+query  GGATGGAAAGGATCACCAGCAATATTTCAATGTAGCATGACAAAAATCTTAGAGCCTTTT
+       :::::::::::::::::::::::::: ::: :::::::::::::::::::::::::::::
+Gag-Po GGATGGAAAGGATCACCAGCAATATTCCAAAGTAGCATGACAAAAATCTTAGAGCCTTTT
+          2220      2230      2240      2250      2260      2270   
+
+              820       830       840       850       860       870
+query  AGAAAACAAAATCCAGACATAGTTATATATCAATACATGGATGATTTGTATGTAGGATCT
+       :::::::::::::::::::::::::: :::::::::::::::::::::::::::::::::
+Gag-Po AGAAAACAAAATCCAGACATAGTTATCTATCAATACATGGATGATTTGTATGTAGGATCT
+          2280      2290      2300      2310      2320      2330   
+
+              880       890       900       910       920       930
+query  GACTTAGAAATAGAGCAGCATAGAACAAAAATAGAGGAACTGAGACAACATCTGTTGAGG
+       ::::::::::::: :::::::::::::::::::::::: :::::::::::::::::::::
+Gag-Po GACTTAGAAATAGGGCAGCATAGAACAAAAATAGAGGAGCTGAGACAACATCTGTTGAGG
+          2340      2350      2360      2370      2380      2390   
+
+              940       950       960       970       980       990
+query  TGGGGATTTACCACACCAGACAAAAAACATCAGAAAGAGCCTCCATTCCTTTGGATGGGT
+       :::::: ::::::::::::::::::::::::::::::: :::::::::::::::::::::
+Gag-Po TGGGGACTTACCACACCAGACAAAAAACATCAGAAAGAACCTCCATTCCTTTGGATGGGT
+          2400      2410      2420      2430      2440      2450   
+
+             1000      1010      1020      1030      1040      1050
+query  TATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAATGCTGCCAGAAAAAGACAGC
+       ::::::::::::::::::::::::::::::::::::::: ::::::::::::::::::::
+Gag-Po TATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAGTGCTGCCAGAAAAAGACAGC
+          2460      2470      2480      2490      2500      2510   
+
+             1060      1070      1080      1090      1100      1110
+query  TGGACTGTCAATGACATACAGAAGTTAGTAGGAAAATTAAATTGGGCAAGTCAGATTTAT
+       ::::::::::::::::::::::::::::: :: ::::: :::::::::::::::::::: 
+Gag-Po TGGACTGTCAATGACATACAGAAGTTAGTGGGGAAATTGAATTGGGCAAGTCAGATTTAC
+          2520      2530      2540      2550      2560      2570   
+
+             1120      1130                                        
+query  CCAGGGATTAAAGTAAAACAATTGTGT                                 
+       ::::::::::::::::  ::::: :::                                 
+Gag-Po CCAGGGATTAAAGTAAGGCAATTATGTAAACTCCTTAGAGGAACCAAAGCACTAACAGAA
+          2580      2590      2600      2610      2620      2630   
+
+>>Pol                                                     (3012 nt)
+ initn: 5127 init1: 5127 opt: 5172  Z-score: 2347.0  bits: 447.6 E(): 8e-128
+banded Smith-Waterman score: 5172;  94.987% identity (94.987% similar) in 1137 nt overlap (1-1137:169-1305)
+
+                                             10        20        30
+query                                CCTCAAATCACTCTTTGGCAGCGACCCCTC
+                                     :::::  ::::::::::::: :::::::::
+Pol    GATAGACAAGGAACTGTATCCTTTAACTTCCCTCAGGTCACTCTTTGGCAACGACCCCTC
+      140       150       160       170       180       190        
+
+               40        50        60        70        80        90
+query  GTTGCAATAAAGATAGGGGGGCAGCTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+       ::  ::::::::::::::::::: ::::::::::::::::::::::::::::::::::::
+Pol    GTCACAATAAAGATAGGGGGGCAACTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+      200       210       220       230       240       250        
+
+              100       110       120       130       140       150
+query  ACAGTATTAGAAGAAATGAATTTAACAGGGAAATGGAAACCAAAAATGATAGGGGGAATT
+       ::::::::::::::::::: :::  :::: : ::::::::::::::::::::::::::::
+Pol    ACAGTATTAGAAGAAATGAGTTTGCCAGGAAGATGGAAACCAAAAATGATAGGGGGAATT
+      260       270       280       290       300       310        
+
+              160       170       180       190       200       210
+query  GGAGGTTTTATCAAAGTGAAACAGTATGATCAGGTAGCTATAGAAATCTGTGGACATAAA
+       ::::::::::::::::: : ::::::::::::: ::   :::::::::::::::::::::
+Pol    GGAGGTTTTATCAAAGTAAGACAGTATGATCAGATACTCATAGAAATCTGTGGACATAAA
+      320       330       340       350       360       370        
+
+              220       230       240       250       260       270
+query  GTTACAGGTACAGTATTAGTAGGACCCACACCTGTCAATATAATTGGAAGGAATCTGTTG
+       : :: ::::::::::::::::::::: ::::::::::: ::::::::::: :::::::::
+Pol    GCTATAGGTACAGTATTAGTAGGACCTACACCTGTCAACATAATTGGAAGAAATCTGTTG
+      380       390       400       410       420       430        
+
+              280       290       300       310       320       330
+query  ACTCAGCTTGGCTGCACTTTAAATTTTCCCATTAGTCCTATTGAAACTGTACCAGTAAAA
+       :::::: :::: ::::::::::::::::::::::: :::::::: :::::::::::::::
+Pol    ACTCAGATTGGTTGCACTTTAAATTTTCCCATTAGCCCTATTGAGACTGTACCAGTAAAA
+      440       450       460       470       480       490        
+
+              340       350       360       370       380       390
+query  TTAAAGCCAGGAATGGATGGCCCAAAAGTAAAACAATGGCCATTGACAGAAGAAAAAATA
+       ::::::::::::::::::::::::::::: ::::::::::::::::::::::::::::::
+Pol    TTAAAGCCAGGAATGGATGGCCCAAAAGTTAAACAATGGCCATTGACAGAAGAAAAAATA
+      500       510       520       530       540       550        
+
+              400       410       420       430       440       450
+query  AAAGCATTAATAGAAATTTGCACAGAAATGGAAAAGGAAGGGAAAATTTCAAAAATTGGG
+       ::::::::: :::::::::: ::::: :::::::::::::::::::::::::::::::::
+Pol    AAAGCATTAGTAGAAATTTGTACAGAGATGGAAAAGGAAGGGAAAATTTCAAAAATTGGG
+      560       570       580       590       600       610        
+
+              460       470       480       490       500       510
+query  CCTGAAAATCCATACAATACTCCAGTGTTTGCAATAAAGAAGAAAGACAGTACTAAATGG
+       :::::::::::::::::::::::::: ::::: :::::::: ::::::::::::::::::
+Pol    CCTGAAAATCCATACAATACTCCAGTATTTGCCATAAAGAAAAAAGACAGTACTAAATGG
+      620       630       640       650       660       670        
+
+              520       530       540       550       560       570
+query  AGAAAATTAGTAGATTTCAGAGAACTTAATAAAAGGACTCAAGACTTCTGGGAAGTTCAA
+       :::::::::::::::::::::::::::::::: :: ::::::::::::::::::::::::
+Pol    AGAAAATTAGTAGATTTCAGAGAACTTAATAAGAGAACTCAAGACTTCTGGGAAGTTCAA
+      680       690       700       710       720       730        
+
+              580       590       600       610       620       630
+query  TTAGGAATACCACATCCTGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGATGTG
+       ::::::::::::::::: ::::::::::::::::::::::::::::::::::::::::::
+Pol    TTAGGAATACCACATCCCGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGATGTG
+      740       750       760       770       780       790        
+
+              640       650       660       670       680       690
+query  GGTGATGCATATTTTTCAGTTCCCTTAGATAAAGAATTTAGAAAATATACTGCATTTACC
+       :::::::::::::::::::::::::::::: :::: :: :: :: :::::::::::::::
+Pol    GGTGATGCATATTTTTCAGTTCCCTTAGATGAAGACTTCAGGAAGTATACTGCATTTACC
+      800       810       820       830       840       850        
+
+              700       710       720       730       740       750
+query  ATACCTAGTCTAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCACAG
+       ::::::::: ::::::::::::::::::::::::::::::::::::::::::::::::::
+Pol    ATACCTAGTATAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCACAG
+      860       870       880       890       900       910        
+
+              760       770       780       790       800       810
+query  GGATGGAAAGGATCACCAGCAATATTTCAATGTAGCATGACAAAAATCTTAGAGCCTTTT
+       :::::::::::::::::::::::::: ::: :::::::::::::::::::::::::::::
+Pol    GGATGGAAAGGATCACCAGCAATATTCCAAAGTAGCATGACAAAAATCTTAGAGCCTTTT
+      920       930       940       950       960       970        
+
+              820       830       840       850       860       870
+query  AGAAAACAAAATCCAGACATAGTTATATATCAATACATGGATGATTTGTATGTAGGATCT
+       :::::::::::::::::::::::::: :::::::::::::::::::::::::::::::::
+Pol    AGAAAACAAAATCCAGACATAGTTATCTATCAATACATGGATGATTTGTATGTAGGATCT
+      980       990      1000      1010      1020      1030        
+
+              880       890       900       910       920       930
+query  GACTTAGAAATAGAGCAGCATAGAACAAAAATAGAGGAACTGAGACAACATCTGTTGAGG
+       ::::::::::::: :::::::::::::::::::::::: :::::::::::::::::::::
+Pol    GACTTAGAAATAGGGCAGCATAGAACAAAAATAGAGGAGCTGAGACAACATCTGTTGAGG
+     1040      1050      1060      1070      1080      1090        
+
+              940       950       960       970       980       990
+query  TGGGGATTTACCACACCAGACAAAAAACATCAGAAAGAGCCTCCATTCCTTTGGATGGGT
+       :::::: ::::::::::::::::::::::::::::::: :::::::::::::::::::::
+Pol    TGGGGACTTACCACACCAGACAAAAAACATCAGAAAGAACCTCCATTCCTTTGGATGGGT
+     1100      1110      1120      1130      1140      1150        
+
+             1000      1010      1020      1030      1040      1050
+query  TATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAATGCTGCCAGAAAAAGACAGC
+       ::::::::::::::::::::::::::::::::::::::: ::::::::::::::::::::
+Pol    TATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAGTGCTGCCAGAAAAAGACAGC
+     1160      1170      1180      1190      1200      1210        
+
+             1060      1070      1080      1090      1100      1110
+query  TGGACTGTCAATGACATACAGAAGTTAGTAGGAAAATTAAATTGGGCAAGTCAGATTTAT
+       ::::::::::::::::::::::::::::: :: ::::: :::::::::::::::::::: 
+Pol    TGGACTGTCAATGACATACAGAAGTTAGTGGGGAAATTGAATTGGGCAAGTCAGATTTAC
+     1220      1230      1240      1250      1260      1270        
+
+             1120      1130                                        
+query  CCAGGGATTAAAGTAAAACAATTGTGT                                 
+       ::::::::::::::::  ::::: :::                                 
+Pol    CCAGGGATTAAAGTAAGGCAATTATGTAAACTCCTTAGAGGAACCAAAGCACTAACAGAA
+     1280      1290      1300      1310      1320      1330        
+
+>>Pol-PRRT                                                (1617 nt)
+ initn: 5127 init1: 5127 opt: 5172  Z-score: 2347.0  bits: 446.7 E(): 1.5e-127
+banded Smith-Waterman score: 5172;  94.987% identity (94.987% similar) in 1137 nt overlap (1-1137:1-1137)
+
+               10        20        30        40        50        60
+query  CCTCAAATCACTCTTTGGCAGCGACCCCTCGTTGCAATAAAGATAGGGGGGCAGCTAAAG
+       :::::  ::::::::::::: :::::::::::  ::::::::::::::::::: ::::::
+Pol-PR CCTCAGGTCACTCTTTGGCAACGACCCCTCGTCACAATAAAGATAGGGGGGCAACTAAAG
+               10        20        30        40        50        60
+
+               70        80        90       100       110       120
+query  GAAGCTCTATTAGATACAGGAGCAGATGATACAGTATTAGAAGAAATGAATTTAACAGGG
+       ::::::::::::::::::::::::::::::::::::::::::::::::: :::  :::: 
+Pol-PR GAAGCTCTATTAGATACAGGAGCAGATGATACAGTATTAGAAGAAATGAGTTTGCCAGGA
+               70        80        90       100       110       120
+
+              130       140       150       160       170       180
+query  AAATGGAAACCAAAAATGATAGGGGGAATTGGAGGTTTTATCAAAGTGAAACAGTATGAT
+       : ::::::::::::::::::::::::::::::::::::::::::::: : ::::::::::
+Pol-PR AGATGGAAACCAAAAATGATAGGGGGAATTGGAGGTTTTATCAAAGTAAGACAGTATGAT
+              130       140       150       160       170       180
+
+              190       200       210       220       230       240
+query  CAGGTAGCTATAGAAATCTGTGGACATAAAGTTACAGGTACAGTATTAGTAGGACCCACA
+       ::: ::   :::::::::::::::::::::: :: ::::::::::::::::::::: :::
+Pol-PR CAGATACTCATAGAAATCTGTGGACATAAAGCTATAGGTACAGTATTAGTAGGACCTACA
+              190       200       210       220       230       240
+
+              250       260       270       280       290       300
+query  CCTGTCAATATAATTGGAAGGAATCTGTTGACTCAGCTTGGCTGCACTTTAAATTTTCCC
+       :::::::: ::::::::::: ::::::::::::::: :::: ::::::::::::::::::
+Pol-PR CCTGTCAACATAATTGGAAGAAATCTGTTGACTCAGATTGGTTGCACTTTAAATTTTCCC
+              250       260       270       280       290       300
+
+              310       320       330       340       350       360
+query  ATTAGTCCTATTGAAACTGTACCAGTAAAATTAAAGCCAGGAATGGATGGCCCAAAAGTA
+       ::::: :::::::: :::::::::::::::::::::::::::::::::::::::::::: 
+Pol-PR ATTAGCCCTATTGAGACTGTACCAGTAAAATTAAAGCCAGGAATGGATGGCCCAAAAGTT
+              310       320       330       340       350       360
+
+              370       380       390       400       410       420
+query  AAACAATGGCCATTGACAGAAGAAAAAATAAAAGCATTAATAGAAATTTGCACAGAAATG
+       ::::::::::::::::::::::::::::::::::::::: :::::::::: ::::: :::
+Pol-PR AAACAATGGCCATTGACAGAAGAAAAAATAAAAGCATTAGTAGAAATTTGTACAGAGATG
+              370       380       390       400       410       420
+
+              430       440       450       460       470       480
+query  GAAAAGGAAGGGAAAATTTCAAAAATTGGGCCTGAAAATCCATACAATACTCCAGTGTTT
+       :::::::::::::::::::::::::::::::::::::::::::::::::::::::: :::
+Pol-PR GAAAAGGAAGGGAAAATTTCAAAAATTGGGCCTGAAAATCCATACAATACTCCAGTATTT
+              430       440       450       460       470       480
+
+              490       500       510       520       530       540
+query  GCAATAAAGAAGAAAGACAGTACTAAATGGAGAAAATTAGTAGATTTCAGAGAACTTAAT
+       :: :::::::: ::::::::::::::::::::::::::::::::::::::::::::::::
+Pol-PR GCCATAAAGAAAAAAGACAGTACTAAATGGAGAAAATTAGTAGATTTCAGAGAACTTAAT
+              490       500       510       520       530       540
+
+              550       560       570       580       590       600
+query  AAAAGGACTCAAGACTTCTGGGAAGTTCAATTAGGAATACCACATCCTGCAGGGTTAAAA
+       :: :: ::::::::::::::::::::::::::::::::::::::::: ::::::::::::
+Pol-PR AAGAGAACTCAAGACTTCTGGGAAGTTCAATTAGGAATACCACATCCCGCAGGGTTAAAA
+              550       560       570       580       590       600
+
+              610       620       630       640       650       660
+query  AAGAAAAAATCAGTAACAGTACTGGATGTGGGTGATGCATATTTTTCAGTTCCCTTAGAT
+       ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Pol-PR AAGAAAAAATCAGTAACAGTACTGGATGTGGGTGATGCATATTTTTCAGTTCCCTTAGAT
+              610       620       630       640       650       660
+
+              670       680       690       700       710       720
+query  AAAGAATTTAGAAAATATACTGCATTTACCATACCTAGTCTAAACAATGAGACACCAGGG
+        :::: :: :: :: :::::::::::::::::::::::: ::::::::::::::::::::
+Pol-PR GAAGACTTCAGGAAGTATACTGCATTTACCATACCTAGTATAAACAATGAGACACCAGGG
+              670       680       690       700       710       720
+
+              730       740       750       760       770       780
+query  ATTAGATATCAGTACAATGTGCTTCCACAGGGATGGAAAGGATCACCAGCAATATTTCAA
+       :::::::::::::::::::::::::::::::::::::::::::::::::::::::: :::
+Pol-PR ATTAGATATCAGTACAATGTGCTTCCACAGGGATGGAAAGGATCACCAGCAATATTCCAA
+              730       740       750       760       770       780
+
+              790       800       810       820       830       840
+query  TGTAGCATGACAAAAATCTTAGAGCCTTTTAGAAAACAAAATCCAGACATAGTTATATAT
+        ::::::::::::::::::::::::::::::::::::::::::::::::::::::: :::
+Pol-PR AGTAGCATGACAAAAATCTTAGAGCCTTTTAGAAAACAAAATCCAGACATAGTTATCTAT
+              790       800       810       820       830       840
+
+              850       860       870       880       890       900
+query  CAATACATGGATGATTTGTATGTAGGATCTGACTTAGAAATAGAGCAGCATAGAACAAAA
+       ::::::::::::::::::::::::::::::::::::::::::: ::::::::::::::::
+Pol-PR CAATACATGGATGATTTGTATGTAGGATCTGACTTAGAAATAGGGCAGCATAGAACAAAA
+              850       860       870       880       890       900
+
+              910       920       930       940       950       960
+query  ATAGAGGAACTGAGACAACATCTGTTGAGGTGGGGATTTACCACACCAGACAAAAAACAT
+       :::::::: ::::::::::::::::::::::::::: :::::::::::::::::::::::
+Pol-PR ATAGAGGAGCTGAGACAACATCTGTTGAGGTGGGGACTTACCACACCAGACAAAAAACAT
+              910       920       930       940       950       960
+
+              970       980       990      1000      1010      1020
+query  CAGAAAGAGCCTCCATTCCTTTGGATGGGTTATGAACTCCATCCTGATAAATGGACAGTA
+       :::::::: :::::::::::::::::::::::::::::::::::::::::::::::::::
+Pol-PR CAGAAAGAACCTCCATTCCTTTGGATGGGTTATGAACTCCATCCTGATAAATGGACAGTA
+              970       980       990      1000      1010      1020
+
+             1030      1040      1050      1060      1070      1080
+query  CAGCCTATAATGCTGCCAGAAAAAGACAGCTGGACTGTCAATGACATACAGAAGTTAGTA
+       ::::::::: ::::::::::::::::::::::::::::::::::::::::::::::::: 
+Pol-PR CAGCCTATAGTGCTGCCAGAAAAAGACAGCTGGACTGTCAATGACATACAGAAGTTAGTG
+             1030      1040      1050      1060      1070      1080
+
+             1090      1100      1110      1120      1130          
+query  GGAAAATTAAATTGGGCAAGTCAGATTTATCCAGGGATTAAAGTAAAACAATTGTGT   
+       :: ::::: :::::::::::::::::::: ::::::::::::::::  ::::: :::   
+Pol-PR GGGAAATTGAATTGGGCAAGTCAGATTTACCCAGGGATTAAAGTAAGGCAATTATGTAAA
+             1090      1100      1110      1120      1130      1140
+
+Pol-PR CTCCTTAGAGGAACCAAAGCACTAACAGAAGTAATACCACTAACAGAAGAAGCAGAGCTA
+             1150      1160      1170      1180      1190      1200
+
+>>RT                                                      (1320 nt)
+ initn: 3875 init1: 3875 opt: 3903  Z-score: 1776.1  bits: 340.7 E(): 1.2e-95
+banded Smith-Waterman score: 3903;  96.071% identity (96.071% similar) in 840 nt overlap (298-1137:1-840)
+
+       270       280       290       300       310       320       
+query  TTGACTCAGCTTGGCTGCACTTTAAATTTTCCCATTAGTCCTATTGAAACTGTACCAGTA
+                                     :::::::: :::::::: ::::::::::::
+RT                                   CCCATTAGCCCTATTGAGACTGTACCAGTA
+                                             10        20        30
+
+       330       340       350       360       370       380       
+query  AAATTAAAGCCAGGAATGGATGGCCCAAAAGTAAAACAATGGCCATTGACAGAAGAAAAA
+       :::::::::::::::::::::::::::::::: :::::::::::::::::::::::::::
+RT     AAATTAAAGCCAGGAATGGATGGCCCAAAAGTTAAACAATGGCCATTGACAGAAGAAAAA
+               40        50        60        70        80        90
+
+       390       400       410       420       430       440       
+query  ATAAAAGCATTAATAGAAATTTGCACAGAAATGGAAAAGGAAGGGAAAATTTCAAAAATT
+       :::::::::::: :::::::::: ::::: ::::::::::::::::::::::::::::::
+RT     ATAAAAGCATTAGTAGAAATTTGTACAGAGATGGAAAAGGAAGGGAAAATTTCAAAAATT
+              100       110       120       130       140       150
+
+       450       460       470       480       490       500       
+query  GGGCCTGAAAATCCATACAATACTCCAGTGTTTGCAATAAAGAAGAAAGACAGTACTAAA
+       ::::::::::::::::::::::::::::: ::::: :::::::: :::::::::::::::
+RT     GGGCCTGAAAATCCATACAATACTCCAGTATTTGCCATAAAGAAAAAAGACAGTACTAAA
+              160       170       180       190       200       210
+
+       510       520       530       540       550       560       
+query  TGGAGAAAATTAGTAGATTTCAGAGAACTTAATAAAAGGACTCAAGACTTCTGGGAAGTT
+       ::::::::::::::::::::::::::::::::::: :: :::::::::::::::::::::
+RT     TGGAGAAAATTAGTAGATTTCAGAGAACTTAATAAGAGAACTCAAGACTTCTGGGAAGTT
+              220       230       240       250       260       270
+
+       570       580       590       600       610       620       
+query  CAATTAGGAATACCACATCCTGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGAT
+       :::::::::::::::::::: :::::::::::::::::::::::::::::::::::::::
+RT     CAATTAGGAATACCACATCCCGCAGGGTTAAAAAAGAAAAAATCAGTAACAGTACTGGAT
+              280       290       300       310       320       330
+
+       630       640       650       660       670       680       
+query  GTGGGTGATGCATATTTTTCAGTTCCCTTAGATAAAGAATTTAGAAAATATACTGCATTT
+       ::::::::::::::::::::::::::::::::: :::: :: :: :: ::::::::::::
+RT     GTGGGTGATGCATATTTTTCAGTTCCCTTAGATGAAGACTTCAGGAAGTATACTGCATTT
+              340       350       360       370       380       390
+
+       690       700       710       720       730       740       
+query  ACCATACCTAGTCTAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCA
+       :::::::::::: :::::::::::::::::::::::::::::::::::::::::::::::
+RT     ACCATACCTAGTATAAACAATGAGACACCAGGGATTAGATATCAGTACAATGTGCTTCCA
+              400       410       420       430       440       450
+
+       750       760       770       780       790       800       
+query  CAGGGATGGAAAGGATCACCAGCAATATTTCAATGTAGCATGACAAAAATCTTAGAGCCT
+       ::::::::::::::::::::::::::::: ::: ::::::::::::::::::::::::::
+RT     CAGGGATGGAAAGGATCACCAGCAATATTCCAAAGTAGCATGACAAAAATCTTAGAGCCT
+              460       470       480       490       500       510
+
+       810       820       830       840       850       860       
+query  TTTAGAAAACAAAATCCAGACATAGTTATATATCAATACATGGATGATTTGTATGTAGGA
+       ::::::::::::::::::::::::::::: ::::::::::::::::::::::::::::::
+RT     TTTAGAAAACAAAATCCAGACATAGTTATCTATCAATACATGGATGATTTGTATGTAGGA
+              520       530       540       550       560       570
+
+       870       880       890       900       910       920       
+query  TCTGACTTAGAAATAGAGCAGCATAGAACAAAAATAGAGGAACTGAGACAACATCTGTTG
+       :::::::::::::::: :::::::::::::::::::::::: ::::::::::::::::::
+RT     TCTGACTTAGAAATAGGGCAGCATAGAACAAAAATAGAGGAGCTGAGACAACATCTGTTG
+              580       590       600       610       620       630
+
+       930       940       950       960       970       980       
+query  AGGTGGGGATTTACCACACCAGACAAAAAACATCAGAAAGAGCCTCCATTCCTTTGGATG
+       ::::::::: ::::::::::::::::::::::::::::::: ::::::::::::::::::
+RT     AGGTGGGGACTTACCACACCAGACAAAAAACATCAGAAAGAACCTCCATTCCTTTGGATG
+              640       650       660       670       680       690
+
+       990      1000      1010      1020      1030      1040       
+query  GGTTATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAATGCTGCCAGAAAAAGAC
+       :::::::::::::::::::::::::::::::::::::::::: :::::::::::::::::
+RT     GGTTATGAACTCCATCCTGATAAATGGACAGTACAGCCTATAGTGCTGCCAGAAAAAGAC
+              700       710       720       730       740       750
+
+      1050      1060      1070      1080      1090      1100       
+query  AGCTGGACTGTCAATGACATACAGAAGTTAGTAGGAAAATTAAATTGGGCAAGTCAGATT
+       :::::::::::::::::::::::::::::::: :: ::::: ::::::::::::::::::
+RT     AGCTGGACTGTCAATGACATACAGAAGTTAGTGGGGAAATTGAATTGGGCAAGTCAGATT
+              760       770       780       790       800       810
+
+      1110      1120      1130                                     
+query  TATCCAGGGATTAAAGTAAAACAATTGTGT                              
+       :: ::::::::::::::::  ::::: :::                              
+RT     TACCCAGGGATTAAAGTAAGGCAATTATGTAAACTCCTTAGAGGAACCAAAGCACTAACA
+              820       830       840       850       860       870
+
+>>PR                                                      (297 nt)
+ initn: 1252 init1: 1252 opt: 1269  Z-score: 591.1  bits: 119.3 E(): 5.2e-29
+banded Smith-Waterman score: 1269;  91.919% identity (91.919% similar) in 297 nt overlap (1-297:1-297)
+
+               10        20        30        40        50        60
+query  CCTCAAATCACTCTTTGGCAGCGACCCCTCGTTGCAATAAAGATAGGGGGGCAGCTAAAG
+       :::::  ::::::::::::: :::::::::::  ::::::::::::::::::: ::::::
+PR     CCTCAGGTCACTCTTTGGCAACGACCCCTCGTCACAATAAAGATAGGGGGGCAACTAAAG
+               10        20        30        40        50        60
+
+               70        80        90       100       110       120
+query  GAAGCTCTATTAGATACAGGAGCAGATGATACAGTATTAGAAGAAATGAATTTAACAGGG
+       ::::::::::::::::::::::::::::::::::::::::::::::::: :::  :::: 
+PR     GAAGCTCTATTAGATACAGGAGCAGATGATACAGTATTAGAAGAAATGAGTTTGCCAGGA
+               70        80        90       100       110       120
+
+              130       140       150       160       170       180
+query  AAATGGAAACCAAAAATGATAGGGGGAATTGGAGGTTTTATCAAAGTGAAACAGTATGAT
+       : ::::::::::::::::::::::::::::::::::::::::::::: : ::::::::::
+PR     AGATGGAAACCAAAAATGATAGGGGGAATTGGAGGTTTTATCAAAGTAAGACAGTATGAT
+              130       140       150       160       170       180
+
+              190       200       210       220       230       240
+query  CAGGTAGCTATAGAAATCTGTGGACATAAAGTTACAGGTACAGTATTAGTAGGACCCACA
+       ::: ::   :::::::::::::::::::::: :: ::::::::::::::::::::: :::
+PR     CAGATACTCATAGAAATCTGTGGACATAAAGCTATAGGTACAGTATTAGTAGGACCTACA
+              190       200       210       220       230       240
+
+              250       260       270       280       290       300
+query  CCTGTCAATATAATTGGAAGGAATCTGTTGACTCAGCTTGGCTGCACTTTAAATTTTCCC
+       :::::::: ::::::::::: ::::::::::::::: :::: :::::::::::::::   
+PR     CCTGTCAACATAATTGGAAGAAATCTGTTGACTCAGATTGGTTGCACTTTAAATTTT   
+              250       260       270       280       290          
+
+              310       320       330       340       350       360
+query  ATTAGTCCTATTGAAACTGTACCAGTAAAATTAAAGCCAGGAATGGATGGCCCAAAAGTA
+
+>>Gag                                                     (1503 nt)
+ initn: 138 init1: 138 opt: 155  Z-score: 89.9  bits: 28.9 E(): 0.085
+banded Smith-Waterman score: 155;  87.500% identity (87.500% similar) in 40 nt overlap (1-40:1464-1503)
+
+                                             10        20        30
+query                                CCTCAAATCACTCTTTGGCAGCGACCCCTC
+                                     :::::  ::::::::::::: :::::::::
+Gag    GATAGACAAGGAACTGTATCCTTTAACTTCCCTCAGGTCACTCTTTGGCAACGACCCCTC
+          1440      1450      1460      1470      1480      1490   
+
+               40        50        60        70        80        90
+query  GTTGCAATAAAGATAGGGGGGCAGCTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+       ::  ::::::                                                  
+Gag    GTCACAATAA                                                  
+          1500                                                     
+
+>>Full                                                    (9719 nt)
+rev-comp initn: 116 init1:  76 opt:  84  Z-score: 57.9  bits: 25.7 E(): 0.72
+banded Smith-Waterman score: 84;  71.111% identity (71.111% similar) in 45 nt overlap (1015-972:3224-3267)
+
+         1040      1030      1020      1010      1000       990    
+query- CTTTTTCTGGCAGCATTATAGGCTGTACTGTCCATTTATCAGGATGGAGTTCATAAC-CC
+                                     ::::::  :  :::::: :::   ::: ::
+Full   CACACCAGACAAAAAACATCAGAAAGAACCTCCATTCCTTTGGATGG-GTTATGAACTCC
+          3200      3210      3220      3230      3240       3250  
+
+           980       970       960       950       940       930   
+query- ATCCAAAGGAATGGAGGCTCTTTCTGATGTTTTTTGTCTGGTGTGGTAAATCCCCACCTC
+       ::::  :  ::::::                                             
+Full   ATCCTGATAAATGGACAGTACAGCCTATAGTGCTGCCAGAAAAAGACAGCTGGACTGTCA
+           3260      3270      3280      3290      3300      3310  
+
+>>p6                                                      (159 nt)
+ initn: 138 init1: 138 opt: 155  Z-score: 89.9  bits: 25.7 E():  0.8
+banded Smith-Waterman score: 155;  87.500% identity (87.500% similar) in 40 nt overlap (1-40:120-159)
+
+                                             10        20        30
+query                                CCTCAAATCACTCTTTGGCAGCGACCCCTC
+                                     :::::  ::::::::::::: :::::::::
+p6     GATAGACAAGGAACTGTATCCTTTAACTTCCCTCAGGTCACTCTTTGGCAACGACCCCTC
+      90       100       110       120       130       140         
+
+               40        50        60        70        80        90
+query  GTTGCAATAAAGATAGGGGGGCAGCTAAAGGAAGCTCTATTAGATACAGGAGCAGATGAT
+       ::  ::::::                                                  
+p6     GTCACAATAA                                                  
+     150                                                           
+
+>>Gag-Pol                                                 (4307 nt)
+rev-comp initn:  76 init1:  76 opt:  84  Z-score: 57.9  bits: 24.5 E():  1.6
+banded Smith-Waterman score: 84;  71.111% identity (71.111% similar) in 45 nt overlap (1015-972:2435-2478)
+
+         1040      1030      1020      1010      1000       990    
+query- CTTTTTCTGGCAGCATTATAGGCTGTACTGTCCATTTATCAGGATGGAGTTCATAAC-CC
+                                     ::::::  :  :::::: :::   ::: ::
+Gag-Po CACACCAGACAAAAAACATCAGAAAGAACCTCCATTCCTTTGGATGG-GTTATGAACTCC
+         2410      2420      2430      2440      2450       2460   
+
+           980       970       960       950       940       930   
+query- ATCCAAAGGAATGGAGGCTCTTTCTGATGTTTTTTGTCTGGTGTGGTAAATCCCCACCTC
+       ::::  :  ::::::                                             
+Gag-Po ATCCTGATAAATGGACAGTACAGCCTATAGTGCTGCCAGAAAAAGACAGCTGGACTGTCA
+          2470      2480      2490      2500      2510      2520   
 
 
 
-                                                                 Score    E
-Sequences producing significant alignments:                      (bits) Value
 
-HXB2_gag                                                              815   0.0  
-HXB2_gag-pol                                                          772   0.0  
-HXB2_env                                                               18   9.7  
+1137 residues in 1 query   sequences
+37912 residues in 27 library sequences
+ Scomplib [34.26]
+ start: Wed May 27 14:14:12 2015 done: Wed May 27 14:14:40 2015
+ Total Scan time:  0.000 Total Display time:  0.020
 
->HXB2_gag
-          Length = 500
-
- Score =  815 bits (2106), Expect = 0.0,   Method: Compositional matrix adjust.
- Identities = 392/467 (83%), Positives = 418/467 (89%), Gaps = 3/467 (0%)
-
-Query: 1   MGARASILSGGRLDAWEKIRLRPGGKKQYRLKHLVWASRELERFALNPGLLETAEGCQQL 60
-           MGARAS+LSGG LD WEKIRLRPGGKK+Y+LKH+VWASRELERFA+NPGLLET+EGC+Q+
-Sbjct: 1   MGARASVLSGGELDRWEKIRLRPGGKKKYKLKHIVWASRELERFAVNPGLLETSEGCRQI 60
-
-Query: 61  LEQLQSTLKTGSEELQSLFNTIATLWCVHQRIEIKDTKEALDKIXEVXXXXXXXXXXXXX 120
-           L QLQ +L+TGSEEL+SL+NT+ATL+CVHQRIEIKDTKEALDKI E              
-Sbjct: 61  LGQLQPSLQTGSEELRSLYNTVATLYCVHQRIEIKDTKEALDKIEEEQNKSKKKAQQAAA 120
-
-Query: 121 GPGSSSQVSQNYPIVQNAQGQMVHQPVSPRTLNAWVKVVEEKGFNPEVIPMFSALSEGAT 180
-             G S+QVSQNYPIVQN QGQMVHQ +SPRTLNAWVKVVEEK F+PEVIPMFSALSEGAT
-Sbjct: 121 DTGHSNQVSQNYPIVQNIQGQMVHQAISPRTLNAWVKVVEEKAFSPEVIPMFSALSEGAT 180
-
-Query: 181 PQDLNMMLNIVGGHQGAMQMLKETINEEAAEWDRVHPVHAGPIPPGQMREPRGSDIAGTT 240
-           PQDLN MLN VGGHQ AMQMLKETINEEAAEWDRVHPVHAGPI PGQMREPRGSDIAGTT
-Sbjct: 181 PQDLNTMLNTVGGHQAAMQMLKETINEEAAEWDRVHPVHAGPIAPGQMREPRGSDIAGTT 240
-
-Query: 241 STLQEQIGWMTSNPPIPVGDIYKRWIILGLNKIVRMYSPVSILDIRQGPKEPFRDYVDRF 300
-           STLQEQIGWMT+NPPIPVG+IYKRWIILGLNKIVRMYSP SILDIRQGPKEPFRDYVDRF
-Sbjct: 241 STLQEQIGWMTNNPPIPVGEIYKRWIILGLNKIVRMYSPTSILDIRQGPKEPFRDYVDRF 300
-
-Query: 301 YKTLRAEQATQEVKNWMTETLLVQNANPDCKSILKALGTGATLEEMMTACQGVGGPSHKA 360
-           YKTLRAEQA+QEVKNWMTETLLVQNANPDCK+ILKALG  ATLEEMMTACQGVGGP HKA
-Sbjct: 301 YKTLRAEQASQEVKNWMTETLLVQNANPDCKTILKALGPAATLEEMMTACQGVGGPGHKA 360
-
-Query: 361 RVLAEAMSHV-QQANVMMQRGNFKGQKRI-KCFNCGKEGHLARNCRAPRKKGCWKCGKEG 418
-           RVLAEAMS V   A +MMQRGNF+ Q++I KCFNCGKEGH ARNCRAPRKKGCWKCGKEG
-Sbjct: 361 RVLAEAMSQVTNSATIMMQRGNFRNQRKIVKCFNCGKEGHTARNCRAPRKKGCWKCGKEG 420
-
-Query: 419 HQMKDCTSERQANFLGKIWPSNKGRPGNFPQSRTEPTAPPAEDWGMG 465
-           HQMKDCT ERQANFLGKIWPS KGRPGNF QSR EPTAPP E +  G
-Sbjct: 421 HQMKDCT-ERQANFLGKIWPSYKGRPGNFLQSRPEPTAPPEESFRSG 466
-
-
->HXB2_gag-pol
-          Length = 1435
-
- Score =  772 bits (1993), Expect = 0.0,   Method: Compositional matrix adjust.
- Identities = 377/487 (77%), Positives = 410/487 (84%), Gaps = 6/487 (1%)
-
-Query: 1   MGARASILSGGRLDAWEKIRLRPGGKKQYRLKHLVWASRELERFALNPGLLETAEGCQQL 60
-           MGARAS+LSGG LD WEKIRLRPGGKK+Y+LKH+VWASRELERFA+NPGLLET+EGC+Q+
-Sbjct: 1   MGARASVLSGGELDRWEKIRLRPGGKKKYKLKHIVWASRELERFAVNPGLLETSEGCRQI 60
-
-Query: 61  LEQLQSTLKTGSEELQSLFNTIATLWCVHQRIEIKDTKEALDKIXEVXXXXXXXXXXXXX 120
-           L QLQ +L+TGSEEL+SL+NT+ATL+CVHQRIEIKDTKEALDKI E              
-Sbjct: 61  LGQLQPSLQTGSEELRSLYNTVATLYCVHQRIEIKDTKEALDKIEEEQNKSKKKAQQAAA 120
-
-Query: 121 GPGSSSQVSQNYPIVQNAQGQMVHQPVSPRTLNAWVKVVEEKGFNPEVIPMFSALSEGAT 180
-             G S+QVSQNYPIVQN QGQMVHQ +SPRTLNAWVKVVEEK F+PEVIPMFSALSEGAT
-Sbjct: 121 DTGHSNQVSQNYPIVQNIQGQMVHQAISPRTLNAWVKVVEEKAFSPEVIPMFSALSEGAT 180
-
-Query: 181 PQDLNMMLNIVGGHQGAMQMLKETINEEAAEWDRVHPVHAGPIPPGQMREPRGSDIAGTT 240
-           PQDLN MLN VGGHQ AMQMLKETINEEAAEWDRVHPVHAGPI PGQMREPRGSDIAGTT
-Sbjct: 181 PQDLNTMLNTVGGHQAAMQMLKETINEEAAEWDRVHPVHAGPIAPGQMREPRGSDIAGTT 240
-
-Query: 241 STLQEQIGWMTSNPPIPVGDIYKRWIILGLNKIVRMYSPVSILDIRQGPKEPFRDYVDRF 300
-           STLQEQIGWMT+NPPIPVG+IYKRWIILGLNKIVRMYSP SILDIRQGPKEPFRDYVDRF
-Sbjct: 241 STLQEQIGWMTNNPPIPVGEIYKRWIILGLNKIVRMYSPTSILDIRQGPKEPFRDYVDRF 300
-
-Query: 301 YKTLRAEQATQEVKNWMTETLLVQNANPDCKSILKALGTGATLEEMMTACQGVGGPSHKA 360
-           YKTLRAEQA+QEVKNWMTETLLVQNANPDCK+ILKALG  ATLEEMMTACQGVGGP HKA
-Sbjct: 301 YKTLRAEQASQEVKNWMTETLLVQNANPDCKTILKALGPAATLEEMMTACQGVGGPGHKA 360
-
-Query: 361 RVLAEAMSHV-QQANVMMQRGNFKGQKRI-KCFNCGKEGHLARNCRAPRKKGCWKCGKEG 418
-           RVLAEAMS V   A +MMQRGNF+ Q++I KCFNCGKEGH ARNCRAPRKKGCWKCGKEG
-Sbjct: 361 RVLAEAMSQVTNSATIMMQRGNFRNQRKIVKCFNCGKEGHTARNCRAPRKKGCWKCGKEG 420
-
-Query: 419 HQMKDCTSERQANFLGKIWPSNKGRPGNFPQSRTEPTAPPAED---WGMGEGXPSSRNRK 475
-           HQMKDCT ERQANFL +     +G+   F   +T   +P   +   WG     PS     
-Sbjct: 421 HQMKDCT-ERQANFLREDLAFLQGKAREFSSEQTRANSPTRRELQVWGRDNNSPSEAGAD 479
-
-Query: 476 TRNILQF 482
-            +  + F
-Sbjct: 480 RQGTVSF 486
-
-
->HXB2_env
-          Length = 856
-
- Score = 17.7 bits (34), Expect = 9.7,   Method: Compositional matrix adjust.
- Identities = 9/26 (34%), Positives = 15/26 (57%), Gaps = 3/26 (11%)
-
-Query: 270 LNKIVRMYSPVSI---LDIRQGPKEP 292
-           +N++ + YSP+S    L   +GP  P
-Sbjct: 705 VNRVRQGYSPLSFQTHLPTPRGPDRP 730
-
-
-  Database: HXB2ProtDB
-    Posted date:  Apr 9, 2015  4:28 PM
-  Number of letters in database: 4481
-  Number of sequences in database:  10
-  
-Lambda     K      H
-   0.316    0.132    0.408 
-
-Gapped
-Lambda     K      H
-   0.267   0.0410    0.140 
-
-
-Matrix: BLOSUM62
-Gap Penalties: Existence: 11, Extension: 1
-Number of Sequences: 10
-Number of Hits to DB: 6032
-Number of extensions: 302
-Number of successful extensions: 20
-Number of sequences better than 10.0: 3
-Number of HSP's gapped: 3
-Number of HSP's successfully gapped: 3
-Length of query: 495
-Length of database: 4481
-Length adjustment: 49
-Effective length of query: 446
-Effective length of database: 3991
-Effective search space:  1779986
-Effective search space used:  1779986
-Neighboring words threshold: 11
-Window for multiple hits: 40
-X1: 16 ( 7.3 bits)
-X2: 38 (14.6 bits)
-X3: 64 (24.7 bits)
-S1: 34 (18.4 bits)
-S2: 34 (17.7 bits)
+Function used was FASTA [version 34.26.5 April 26, 2007]

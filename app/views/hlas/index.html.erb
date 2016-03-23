@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
-
+<a name="top"></a>
 <h1>Listing HLA Genotypes</h1>
-
-<%= will_paginate %>
-
+<p>
+  <a href="#refine_form">Go to 'Search and Refine the List'.</a>
+</p>
 <table>
   <thead>
     <tr>
-      <th>NIID_ID</th>
-      <th>Lab_ID</th>
+      <th><%= sort_link(@search_p, :niid_id, "NIID_ID") %></th>
+      <th><%= sort_link(@search_p, :lab_id, "Lab_ID") %></th>
       <th colspan="4">HLA-A</th>
       <th colspan="4">HLA-B</th>
       <th colspan="4">HLA-C</th>
@@ -18,14 +18,69 @@
 
   <tbody>
     <% @patients.each do |patient| %>
+      <% next if @genotype.nil? %>
       <% a_serotypes = patient.locus_as.pluck("serotype") %>
+      <% if @genotype == "LocusA" %>
+        <% reject = true %>
+        <% a_serotypes.each do |g| %>
+          <% reject = false if @hlas.exists?(:serotype => g) %>
+        <% end %>
+      <% else %>
+        <% reject = false %>
+      <% end %>
+      <% next if reject %>
       <% a_alleles = patient.locus_as.pluck("allele") %>
+      <% if @genotype == "LocusA" %>
+        <% reject = true %>
+        <% a_alleles.each do |g| %>
+          <% reject = false if @hlas.exists?(:allele => g) %>
+        <% end %>
+      <% else %>
+        <% reject = false %>
+      <% end %>
+      <% next if reject %>
       <% a_allotypes = Array.new %>
       <% b_serotypes = patient.locus_bs.pluck("serotype") %>
+      <% if @genotype == "LocusB" %>
+        <% reject = true %>
+        <% b_serotypes.each do |g| %>
+          <% reject = false if @hlas.exists?(:serotype => g) %>
+        <% end %>
+      <% else %>
+        <% reject = false %>
+      <% end %>
+      <% next if reject %>
       <% b_alleles = patient.locus_bs.pluck("allele") %>
+      <% if @genotype == "LocusB" %>
+        <% reject = true %>
+        <% b_alleles.each do |g| %>
+          <% reject = false if @hlas.exists?(:allele => g) %>
+        <% end %>
+      <% else %>
+        <% reject = false %>
+      <% end %>
+      <% next if reject %>
       <% b_allotypes = Array.new %>
       <% c_serotypes = patient.locus_cs.pluck("serotype") %>
+      <% if @genotype == "LocusC" %>
+        <% reject = true %>
+        <% c_serotypes.each do |g| %>
+          <% reject = false if @hlas.exists?(:serotype => g) %>
+        <% end %>
+      <% else %>
+        <% reject = false %>
+      <% end %>
+      <% next if reject %>
       <% c_alleles = patient.locus_cs.pluck("allele") %>
+      <% if @genotype == "LocusC" %>
+        <% reject = true %>
+        <% c_alleles.each do |g| %>
+          <% reject = false if @hlas.exists?(:allele => g) %>
+        <% end %>
+      <% else %>
+        <% reject = false %>
+      <% end %>
+      <% next if reject %>
       <% c_allotypes = Array.new %>
 
       <% for i in [0, 1] %>
@@ -73,5 +128,78 @@
   </tbody>
 </table>
 
-<%= will_paginate %>
-<br>
+<a name="refine_form"></a>
+<div class="well">
+  <H3>Search and Refine the List</h3>
+  <H4>By patient properties</H4>
+  <form class="form-horizontal">
+    <%= search_form_for @search_p do |f| %>
+      <div class="form-group">
+        <%= f.label :niid_id_cont, 'NIID ID =', :class => "control-label col-xs-2" %>
+        <%= f.text_field :niid_id_cont, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :affiliation_eq, 'Affiliation =', :class => "control-label col-xs-2" %>
+        <%= f.select :affiliation_eq, {"Vietnam" => "Vietnam", "Ghana" => "Ghana", "India" => "India", "Japan" => "Japan"}, :include_blank => 'All', :class => "form-control" %>
+        <%= f.label :gender_eq, 'Gender =', :class => "control-label col-xs-2" %>
+        <%= f.select :gender_eq, {"Male" => "Male", "Female" => "Female", "Other" => "Other", "Unknown" => "Unknown"}, :include_blank => 'All', :class => "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :date_diagnosed_gt, 'Diagnosed from', :class => "control-label col-xs-2" %>
+        <div class="col-xs-3">
+          <%= f.date_select :date_diagnosed_gt, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date', :class => "form-control" %>
+        </div>
+        <br>
+        <%= f.label :date_diagnosed_lt, 'to', :class => "control-label col-xs-2" %>
+        <div class="col-xs-3">
+          <%= f.date_select :date_diagnosed_lt, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date', :class => "form-control" %>
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :edu_background_eq, 'Education=', :class => "control-label col-xs-2" %>
+        <%= f.select :edu_background_eq, Patient.edu_background.options, :include_blank => 'All', :class => "form-control" %>
+
+        <%= f.label :marital_status_eq, 'MaritalStatus=', :class => "control-label col-xs-2" %>
+      <%= f.select :marital_status_eq, Patient.marital_status.options, :include_blank => 'All', :class => "form-control" %>
+        <%= f.label :risk_eq, 'Risk=', :class => "control-label col-xs-2" %>
+        <%= f.select :risk_eq, Patient.risk.options, :include_blank => 'All', :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_of_art_init_null, "naive?", :class => "control-label col-xs-2", :class => "form-control" %>
+        <%= f.check_box :date_of_art_init_null, :checked => true, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="action">
+        <%= f.submit 'Search patient property!', :class => "btn btn-primary btn-sm" %>
+        <input type="reset" value="Clear" class="btn btn-default btn-sm">
+      </div>
+    <% end %>
+  </form>
+  <br>
+  <H4>By HLA Genotype</H4>
+  <form class="form-horizontal">
+    <%= search_form_for @search_h do |f| %>
+      <div class="form-group">
+        <%= f.label :type_eq, 'Locus', :class => "control-label col-xs-2" %>
+        <%= f.select :type_eq, { "HLA-A" => "LocusA", "HLA-B" => "LocusB", "HLA-C" => "LocusC"}, :include_blank => 'All', :class => "form-control" %><br>
+      </div>
+      <div class="form-group">
+        <%= f.label :serotype_cont, 'Serotype=', :class => "control-label col-xs-2" %>
+        <%= f.text_field :serotype_cont, :class => "form-control" %>
+        <%= f.label :allele_cont, 'Allele=', :class => "control-label col-xs-2" %>
+        <%= f.text_field :allele_cont, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="action">
+        <%= f.submit 'Search HLA Genotype!', :class => "btn btn-primary btn-sm" %>
+        <input type="reset" value="Clear" class="btn btn-default btn-sm">
+      </div>
+    <% end %>
+  </form>
+</div>
+<p>
+<a href="#top">Go to top of the list</a>
+</p>

@@ -1,14 +1,14 @@
 <p id="notice"><%= notice %></p>
-
+<a name="top"></a>
 <h1>Listing Samples' Information</h1>
-
-<%= will_paginate %>
-
+<p>
+  <a href="#refine_form">Go to 'Search and Refine the List'.</a>
+</p>
 <table>
   <thead>
     <tr>
-      <th>NIID_ID</th>
-      <th>Lab_ID</th>
+      <th><%= sort_link(@search_p, :niid_id, "NIID_ID") %></th>
+      <th><%= sort_link(@search_p, :lab_id,  "Lab_ID") %></th>
       <th>S/N</th>
       <th>Date sample taken</th>
       <th>Serostatus</th>
@@ -24,12 +24,20 @@
 
   <tbody>
     <% @patients.each do |patient| %>
+      <% samples_for_patient = Sample.where( patient_id: patient.id ) %>
+      <% sample_select = 0 %>
+      <% samples_for_patient.each do |ss| %>
+        <% if @samples.exists?(ss) %>
+          <% sample_select = 1 %>
+        <% end %>
+      <% end %>
+      <% next if sample_select == 0 %>
       <tr>
         <td><%= patient.niid_id %></td>
         <td><%= patient.lab_id %></td>
-      <% samples_for_patient = Sample.where( patient_id: patient.id ) %>
       <% if samples_for_patient.exists? then %>
         <% samples_for_patient.each_with_index do |sample, i| %>
+          <% next if !@samples.exists?(sample) %>
           <% if i >= 1 then %>
           <tr><td></td><td>&emsp;&emsp;&#8627;</td>
           <% end %>
@@ -79,6 +87,88 @@
   </tbody>
 </table>
 
-<%= will_paginate %>
-<br>
+<a name="refine_form"></a>
+<div class="well">
+  <H3>Search and Refine the List</h3>
+  <H4>By patient properties</H4>
+  <form class="form-horizontal">
+    <%= search_form_for @search_p do |f| %>
+      <div class="form-group">
+        <%= f.label :niid_id_cont, 'NIID ID =', :class => "control-label col-xs-2" %>
+        <%= f.text_field :niid_id_cont, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :affiliation_eq, 'Affiliation =', :class => "control-label col-xs-2" %>
+        <%= f.select :affiliation_eq, {"Vietnam" => "Vietnam", "Ghana" => "Ghana", "India" => "India", "Japan" => "Japan"}, :include_blank => 'All', :class => "form-control" %>
+        <%= f.label :gender_eq, 'Gender =', :class => "control-label col-xs-2" %>
+        <%= f.select :gender_eq, {"Male" => "Male", "Female" => "Female", "Other" => "Other", "Unknown" => "Unknown"}, :include_blank => 'All', :class => "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :date_diagnosed_gt, 'Diagnosed from', :class => "control-label col-xs-2" %>
+        <div class="col-xs-3">
+          <%= f.date_select :date_diagnosed_gt, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date', :class => "form-control" %>
+        </div>
+        <br>
+        <%= f.label :date_diagnosed_lt, 'to', :class => "control-label col-xs-2" %>
+        <div class="col-xs-3">
+          <%= f.date_select :date_diagnosed_lt, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :include_blank => true, :class => 'date', :class => "form-control" %>
+        </div>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :edu_background_eq, 'Education=', :class => "control-label col-xs-2" %>
+        <%= f.select :edu_background_eq, Patient.edu_background.options, :include_blank => 'All', :class => "form-control" %>
 
+        <%= f.label :marital_status_eq, 'MaritalStatus=', :class => "control-label col-xs-2" %>
+      <%= f.select :marital_status_eq, Patient.marital_status.options, :include_blank => 'All', :class => "form-control" %>
+        <%= f.label :risk_eq, 'Risk=', :class => "control-label col-xs-2" %>
+        <%= f.select :risk_eq, Patient.risk.options, :include_blank => 'All', :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_of_art_init_null, "naive?", :class => "control-label col-xs-2", :class => "form-control" %>
+        <%= f.check_box :date_of_art_init_null, :checked => true, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="action">
+        <%= f.submit 'Search patient property!', :class => "btn btn-primary btn-sm" %>
+        <input type="reset" value="Clear" class="btn btn-default btn-sm">
+      </div>
+    <% end %>
+  </form>
+  <br>
+  <H4>By sample properties</H4>
+  <form class="form-horizontal">
+    <%= search_form_for @search_s do |f| %>
+      <div class="form-group">
+        <%= f.label :date_sample_taken_gteq, 'Sample taken from', :class => "control-label col-xs-2" %>
+        <%= f.date_select :date_sample_taken_gteq, :use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :default => Time.local(2000), :class => "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :date_sample_taken_lteq, 'to', :class => "control-label col-xs-2" %>
+        <%= f.date_select :date_sample_taken_lteq, {:use_month_numbers => false, :use_short_month => true, :start_year => 2000, :end_year => Time.now.year, :default => Time.now}, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="form-group">
+        <%= f.label :serostatus_eq, 'Serostatus', :class => "control-label col-xs-2" %>
+        <%= f.select :serostatus_eq, { "HIV-1" => 1, "HIV-2" => 2, "Dual" => 3}, :include_blank => 'All', :class => "form-control" %><br>
+      </div>
+      <div class="form-inputs">
+        <%= f.label :cd4_count_gt, 'CD4 count >', :class => "control-label col-xs-2" %>
+        <%= f.text_field :cd4_count_gt, :class => "form-control" %>
+      </div>
+      <div class="form-inputs">
+        <%= f.label :viral_load_gt, 'Viral Load >', :class => "control-label col-xs-2" %>
+        <%= f.text_field :viral_load_gt, :class => "form-control" %>
+      </div>
+      <br>
+      <div class="action">
+        <%= f.submit 'Search sample property!', :class => "btn btn-primary btn-sm" %>
+        <input type="reset" value="Clear" class="btn btn-default btn-sm">
+      </div>
+    <% end %>
+  </form>
+</div>
+<p>
+<a href="#top">Go to top of the list</a>

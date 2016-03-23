@@ -21,8 +21,10 @@ class SequencesController < ApplicationController
 #    @sequences = Sequence.all
 #    @samples = Sample.all
 #    @patients = Patient.order("niid_id")
-    @sequences = Sequence.paginate(page: params[:page])
-    @samples = Sample.paginate(page: params[:page])
+#    @sequences = Sequence.paginate(page: params[:page])
+    @sequences = Sequence
+#    @samples = Sample.paginate(page: params[:page])
+    @samples = Sample
     @patients = Patient.order("niid_id").paginate(page: params[:page])
   end
 
@@ -49,11 +51,16 @@ class SequencesController < ApplicationController
 
     querysequence = @sequence.sequence.gsub(/-+/, '')
     querysequence.gsub!(/\s/, '')
-    factory = Bio::Blast.local('blastn', '/var/www/Rails/hla-portal/public/HXB2nucDB', '', '/usr/local/bin/blastall' )
-    report = factory.query(querysequence)
+    querystring = ">query\n" << querysequence
+    queryfasta = Bio::FastaFormat.new(querystring)
+#    factory = Bio::Blast.local('blastn', '/var/www/Rails/hla-portal/public/HXB2nucDB', '', '/usr/local/bin/blastall' )
+    factory = Bio::Fasta.local('/usr/local/bin/fasta34', '/var/www/Rails/hla-portal/public/HXB2-DNAs.fas', option = '-b 8')
+#    report = factory.query(querysequence)
+    report = factory.query(queryfasta)
     highhit = Hash.new     # Hit-target with { target_id => report_instance }
     report.each do |hit|
-      if hit.bit_score > 0.8 * querysequence.length
+#      if hit.bit_score > 0.8 * querysequence.length
+      if hit.evalue < 1e-100
         highhit[hit.target_id] = hit
       end
     end
@@ -69,9 +76,9 @@ class SequencesController < ApplicationController
         redirect_to(sequences_path, alert: "Since gene field is not selected, your sequence cannot be saved!!")
         return
     elsif highhit[besthit[0]].target_id != @sequence.gene
-        # redirect_to(sequences_path, alert: "Since a selected gene (#{@sequence.gene}) is not match the result of BLAST search, your sequence cannot be saved!!")
+        # redirect_to(sequences_path, alert: "Since a selected gene (#{@sequence.gene}) is not match the result of FASTA search, your sequence cannot be saved!!")
         # return
-        flash[:notice] = "Selected gene (#{@sequence.gene}) is not match a BLAST result (#{highhit[besthit[0]].target_id}). The BLAST result is adopted."
+        flash[:notice] = "Selected gene (#{@sequence.gene}) is not match a FASTA result (#{highhit[besthit[0]].target_id}). The FASTA result is adopted."
         @sequence.gene = highhit[besthit[0]].target_id
     end
 

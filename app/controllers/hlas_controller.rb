@@ -45,14 +45,22 @@ class HlasController < ApplicationController
   end
 
   def index
-    @patients = Patient.order("niid_id").paginate(page: params[:page])
-#    @locus_as = LocusA.all
-#    @locus_bs = LocusB.all
-#    @locus_cs = LocusC.all
-    @hlas = Hla.paginate(page: params[:page])
-    @locus_as = LocusA.paginate(page: params[:page])
-    @locus_bs = LocusB.paginate(page: params[:page])
-    @locus_cs = LocusC.paginate(page: params[:page])
+    @search_p = Patient.search(params[:q])
+    # @search_a = LocusA.search(params[:q])
+    # @search_b = LocusB.search(params[:q])
+    # @search_c = LocusC.search(params[:q])
+    @search_h = Hla.search(params[:q])
+    # @patients = Patient.order("niid_id").paginate(page: params[:page])
+    @patients = @search_p.result.order(params[:sort])
+    #@hlas = Hla.paginate(page: params[:page])
+    @hlas = @search_h.result
+    @genotype = @hlas.first.type if @hlas.first.present?
+    @locus_as = LocusA
+    @locus_bs = LocusB
+    @locus_cs = LocusC
+    # @locus_as = @search_a.result.order(params[:sort]).paginate(page: params[:page])
+    # @locus_bs = @search_b.result.order(params[:sort]).paginate(page: params[:page])
+    # @locus_cs = @search_c.result.order(params[:sort]).paginate(page: params[:page])
   end
 
   def edit

@@ -1,7 +1,7 @@
 <% provide(:title, 'Listing Sequences\' Information') %>
 <h2><%= yield(:title) %></h2>
 
-<%= will_paginate %>
+<%= will_paginate @patients %>
 
 <table>
   <thead>
@@ -65,7 +65,7 @@
   <tr></tr>
 </table>
 
-<%= will_paginate %>
+<%= will_paginate @patients %>
 
 <div class="actions">
   <p>
